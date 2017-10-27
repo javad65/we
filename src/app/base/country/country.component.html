@@ -1,0 +1,171 @@
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
+
+<p>
+  country works!
+</p>
+
+<button kendoButton  >My Kendo UI Button</button>
+
+
+<kendo-buttongroup>
+  <button kendoButton [togglable]="true">
+    Option A
+  </button>
+  <button kendoButton [togglable]="true">
+    Option B
+  </button>
+  <button kendoButton [togglable]="true">
+    Option C
+  </button>
+</kendo-buttongroup>
+<hr>
+<br> 
+<!-- 
+<div style="margin: 10px">
+  <div class="card">
+      <div class="card-block k-form">
+          <fieldset>
+          <legend>Selection Settings</legend>
+          <div class="k-form-field">
+              <span>Mode</span>
+              <input type="radio" name="mode" id="single" value="single" class="k-radio"
+                  >
+              <label class="k-radio-label" for="single">Single</label>
+              <input type="radio" name="mode" id="multiple" value="multiple" class="k-radio"
+                  >
+              <label class="k-radio-label" for="multiple">Multiple</label>
+          </div>
+
+          <label class="k-form-field">
+              <input type="checkbox" id="chkboxonly" class="k-checkbox"
+               >
+              <label class="k-checkbox-label" for="chkboxonly">Use checkbox only selection</label>
+          </label>
+          </fieldset>
+      </div>
+  </div>
+</div> -->
+
+
+<!-- [filterable]="true" -->
+
+<kendo-grid
+[data]="gridDataResult | async"
+[pageSize]="state.take"
+[skip]="state.skip"
+[sort]="state.sort"
+[sortable]="true"
+[pageable]="true"
+[selectable]="true"
+[scrollable]="'none'"
+(dataStateChange)="dataStateChange($event)"
+(edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+(save)="saveHandler($event)" (remove)="removeHandler($event)"
+(add)="addHandler($event)"
+
+>
+<ng-template kendoGridToolbarTemplate>
+  <button kendoGridAddCommand type="button">Add new</button>
+</ng-template>
+<kendo-grid-column field="countryId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+<kendo-grid-column field="countryName" width="200">
+
+  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+    <input [(ngModel)]="dataItem.countryName" name="countryName" class="k-textbox" required/>
+</ng-template>
+
+</kendo-grid-column>
+
+
+<kendo-grid-command-column title="command" width="60">
+  <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridEditCommand type="button" >Edit</button>
+      <button kendoGridRemoveCommand type="button">Remove</button>
+      <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+      <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+  </ng-template>
+</kendo-grid-command-column>
+
+</kendo-grid>
+
+<hr>
+<br> 
+
+<!-- 
+<kendo-grid 
+[data]="countries" 
+[pageSize]="2"
+[skip]="0"
+[sortable]="true"
+[pageable]="true"
+[scrollable]="'none'"
+[height]="410"
+
+>
+  <kendo-grid-column field="countryId" title="ID" width="40">
+  </kendo-grid-column>
+  <kendo-grid-column field="countryName" title="Name" width="250">
+  </kendo-grid-column>
+  
+</kendo-grid>
+
+
+<hr>
+<br>
+
+
+
+
+<kendo-grid 
+[data]="gridData" 
+[pageSize]="state.take"
+[skip]="state.skip"
+[sort]="state.sort"
+[sortable]="true"
+[pageable]="true"
+[scrollable]="'none'"
+(dataStateChange)="dataStateChange($event)"
+[height]="410"
+
+>
+  <kendo-grid-column field="ProductID" title="ID" width="40">
+  </kendo-grid-column>
+  <kendo-grid-column field="ProductName" title="Name" width="250">
+  </kendo-grid-column>
+  <kendo-grid-column field="Category.CategoryName" title="Category">
+  </kendo-grid-column>
+  <kendo-grid-column field="UnitPrice" title="Price" width="80">
+  </kendo-grid-column>
+  <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+  </kendo-grid-column>
+  <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+      <ng-template kendoGridCellTemplate let-dataItem>
+          <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+      </ng-template>
+  </kendo-grid-column>
+</kendo-grid>
+ -->
+
+
+<!-- 
+<kendo-grid
+[data]="view | async"
+[pageSize]="state.take"
+[skip]="state.skip"
+[sort]="state.sort"
+[sortable]="true"
+[pageable]="true"
+[scrollable]="'none'"
+(dataStateChange)="dataStateChange($event)"
+>
+<kendo-grid-column field="CategoryID" width="130"></kendo-grid-column>
+<kendo-grid-column field="CategoryName" width="200"></kendo-grid-column>
+<kendo-grid-column field="Description" [sortable]="false">
+</kendo-grid-column>
+</kendo-grid> -->
+
+
+
+
+</form> 
+
