@@ -22,10 +22,13 @@ import { CountryComboComponent } from './components/country-combo/country-combo.
 
 // import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { BaseService } from './shared/services/base.service';
+import { BaseKendoGridService } from './shared/services/base-kendo-grid.service';
+
 @NgModule({
   declarations: [
+   // CountryComboComponent,
     AppComponent,
-    CountryComboComponent,
     // ,PageNotFoundComponent
   ],
   imports: [
@@ -46,7 +49,10 @@ import { CountryComboComponent } from './components/country-combo/country-combo.
 
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    BaseService,
+    BaseKendoGridService
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

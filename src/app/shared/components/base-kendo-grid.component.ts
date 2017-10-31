@@ -56,9 +56,7 @@ export abstract class BaseKendoGridComponent implements OnInit {
 
     protected saveHandler({ sender, rowIndex, dataItem, isNew }) {
         this._service.save(dataItem, isNew);
-
         sender.closeRow(rowIndex);
-
         this.editedRowIndex = undefined;
         this.editedItem = undefined;
     }

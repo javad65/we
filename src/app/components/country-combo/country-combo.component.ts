@@ -7,21 +7,24 @@ import { CountryComboService } from './country-combo.service';
   selector: 'app-country-combo',
   templateUrl: './country-combo.component.html',
   styleUrls: ['./country-combo.component.scss'],
-  providers: [CountryComboService]
+  providers:   [
+    CountryComboService
+  ]
   // inputs: ['defaultValue']
 })
 export class CountryComboComponent implements OnInit {
-  @Input()
-  defaultValue: number;
+  _service: CountryComboService;
 
-  service: CountryComboService;
-  public listItems: Observable<CountryModel[]> ;
+@Input() selectedCountry: CountryModel;
+ //   service: CountryComboService;
+ // public listItems: Observable<CountryModel[]> ;
 
   private view: Observable<CountryModel[]>;
-  constructor(service: CountryComboService  ) {
+  constructor( service: CountryComboService ) {
+    this._service = service;
     this.view = service;
-
-    this.service = service;
+    this._service .read();
+   // this.service = service;
    }
 
   ngOnInit() {

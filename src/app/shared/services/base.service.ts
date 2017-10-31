@@ -20,7 +20,7 @@ export  class BaseService  {
   public API_URL: string;
   protected _http: Http;
 
-  constructor(http: Http, apiUrl: string) {
+  constructor(http: Http , apiUrl: string   ) {
 
     this._http = http;
     this.API_URL = this.BASE_URL + apiUrl;

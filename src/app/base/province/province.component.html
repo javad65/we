@@ -1,14 +1,6 @@
-
-<!-- <app-country-combo
->
-sdfdsfds
-</app-country-combo> -->
-
-
-
+  
 <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
   
-
   <kendo-grid
   [data]="gridDataResult | async"
   [pageSize]="state.take"
@@ -31,20 +23,16 @@ sdfdsfds
   
   <kendo-grid-column field="countryName" width="200">
       <ng-template kendoGridEditTemplate let-dataItem="dataItem" >
-          <!-- <kendo-dropdownlist 
-           [hidden]="myForm.invalid"
-          [data]="listItems"
-          [value]="countryId"
-         // [defaultItem]="countryId"
-          [textField]="'countryName'"
-          [valueField]="'countryId'"
-          >
-            </kendo-dropdownlist> -->
-<app-country-combo
->
-fff
-</app-country-combo>
-      </ng-template>
+         
+        <app-country-combo
+         name="countryId" 
+         [selectedCountry]="dataItem" 
+         [(ngModel)]="dataItem.countryId" 
+         >
+        
+          </app-country-combo>
+
+  </ng-template>
   </kendo-grid-column>
 
   <kendo-grid-column field="provinceName" width="200">

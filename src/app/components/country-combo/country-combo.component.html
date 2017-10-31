@@ -1,9 +1,7 @@
 <kendo-dropdownlist 
-[data]="listItems"
-[value]="defaultValue"
+[data]="view | async"
+[value]="selectedCountry"
 [textField]="'countryName'"
 [valueField]="'countryId'"
 >
  </kendo-dropdownlist>
-
- gdfgttt

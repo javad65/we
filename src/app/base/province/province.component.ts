@@ -22,9 +22,12 @@ import { BaseKendoGridComponent } from '../../shared/components/base-kendo-grid.
 })
 export class ProvinceComponent extends BaseKendoGridComponent {
   public listItems: Array<CountryModel> ;
+   selectDataItem: CountryModel ;
 
   constructor(service: ProvinceService) {
     super(service);
+
+    this.selectDataItem = {countryId: 3 , countryName: 'sfdsfdsfsd'};
 
     // this._countryService = service;
     // this.gridDataResult = service;
