@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>N2</title>
@@ -9,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
 
-  
+
   <link href="lib/font-awesome/font-awesome.css" rel="stylesheet" />
   <link href="lib/arya-ui/css/arya-ui.css" rel="stylesheet" />
   <link href="lib/arya-admin/css/arya-admin.css" rel="stylesheet" />
@@ -22,7 +23,7 @@
   <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
   <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
   <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" /> -->
-<!-- 
+  <!-- 
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
    <script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
    <script src="http://localhost:8301/Scripts/kendo.aspnetmvc.min.js"></script>
@@ -32,7 +33,7 @@
 
 
 
-          
+
   <!-- <link href="styles.css" rel="stylesheet" type="text/css" /> -->
   <!-- <link href="lib/kendo/2017.3.913/css/kendo.common.min.css" rel="stylesheet" type="text/css" />
   <link href="lib/kendo/2017.3.913/css/kendo.rtl.min.css" rel="stylesheet">
@@ -40,7 +41,7 @@
   <link href="lib/kendo/2017.3.913/css/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" /> -->
 
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src"lib/kendo/2017.3.913/js/jquery.min.js"></script> 
+  <script src "lib/kendo/2017.3.913/js/jquery.min.js"></script>
   <script src="lib/kendo/2017.3.913/js/angular.min.js"></script>
   <script src="lib/kendo/2017.3.913/js/jszip.min.js"></script>
   <script src="lib/kendo/2017.3.913/js/kendo.all.min.js"></script>
@@ -49,9 +50,9 @@
 
 
 
-     <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <!-- <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <!-- 1. Load libraries -->
+  <!-- IE required polyfills, in this exact order -->
+  <!-- <script src="node_modules/es6-shim/es6-shim.min.js"></script>
    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
 
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
@@ -61,7 +62,7 @@
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script> -->
 
-  
+
   <!-- <script src="../../tmp/kendo/dist/js/jquery.min.js"></script> -->
   <!-- <script src="../../tmp/kendo/dist/js/kendo.all.js"></script> -->
 
@@ -73,19 +74,48 @@
  -->
 
 
- <!-- <script src="lib/jquery/modernizr-2.6.2.js"></script>
+  <!-- <script src="lib/jquery/modernizr-2.6.2.js"></script>
  <script src="lib/jquery/jquery-1.10.2.min.js"></script> -->
- <script src="lib/arya-ui/js/arya-ui.js"></script>
+  <script src="lib/arya-ui/js/arya-ui.js"></script>
 
 
 </head>
+
 <body class="k-rtl">
- 
- 
- 
+
+
+
   <app-root>
-              </app-root>
- 
-  
+  </app-root>
+
+  <script>
+
+    $(function () {
+
+      $('.aa-collapse').click(function (e) {
+
+        e.preventDefault();
+        $('.aa-collapse').parent().removeClass('active');
+        var $li = $(this).parent();
+        $li.addClass('aa-link-active');
+        var $sing = $li.find(".aa-collapse-sign").find('em');
+
+        if ($li.hasClass('aa-link-open')) {
+          $li.removeClass('aa-link-open');
+          $li.find('ul').hide();
+          $sing.removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+        }
+        else {
+          $li.addClass('aa-link-open');
+          $li.find('ul').show()
+          $sing.removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+        }
+      });
+
+
+    });
+
+  </script>
 </body>
+
 </html>
