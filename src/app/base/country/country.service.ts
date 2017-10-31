@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-// import 'rxjs/Rx';   // Load all features
 import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Rx';
 
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { toODataString } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-// import { BaseService } from 'app/base.service';
 import { CountryModel } from './country.model';
-import { BaseService } from '../../base.service';
+import { BaseService } from '../../shared/services/base.service';
+import { BaseKendoGridService } from '../../shared/services/base-kendo-grid.service';
 
 @Injectable()
-export class CountryService extends BaseService {
+export class CountryService extends BaseKendoGridService {
 
   constructor(http: Http) {
     super(http, 'country/');
@@ -38,28 +36,12 @@ export class CountryService extends BaseService {
   }
 
   public save(data: CountryModel, isNew?: boolean) {
-    const action = isNew ? this.CREATE_ACTION : this.UPDATE_ACTION;
-
-    if (isNew) {
-      this.add(data).subscribe(
-        d => this.read(),
-        err => console.log('error: ', err)
-      );
-    }   else {
-       this.edit(data).subscribe(
-        d => this.read(),
-        err => console.log('error: ', err)
-      );
-    }
-    // this.reset();
-    // this.read();
-    // this.fetch(action, data)
-    //     .subscribe(() => this.read(), () => this.read());
+    super.save(data, isNew);
   }
 
   public remove(data: CountryModel) {
-  
-    this.delete(data.countryId).subscribe(
+
+    this._baseService.delete(data.countryId).subscribe(
       d => this.read(),
       err => console.log('error: ', err)
     );

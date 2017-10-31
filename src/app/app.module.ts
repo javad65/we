@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // Import the Animations module
@@ -18,11 +18,14 @@ import { WbsModule } from './wbs/wbs.module';
 
 // Components
 import { AppComponent } from './app.component';
+import { CountryComboComponent } from './components/country-combo/country-combo.component';
+
 // import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CountryComboComponent,
     // ,PageNotFoundComponent
   ],
   imports: [
@@ -44,6 +47,9 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }

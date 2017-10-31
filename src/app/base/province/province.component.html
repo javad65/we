@@ -1,3 +1,72 @@
-<p>
-  province works!
-</p>
+
+<!-- <app-country-combo
+>
+sdfdsfds
+</app-country-combo> -->
+
+
+
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
+  
+
+  <kendo-grid
+  [data]="gridDataResult | async"
+  [pageSize]="state.take"
+  [skip]="state.skip"
+  [sort]="state.sort"
+  [sortable]="true"
+  [pageable]="true"
+  [selectable]="true"
+  [scrollable]="'none'"
+  (dataStateChange)="dataStateChange($event)"
+  (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+  (save)="saveHandler($event)" (remove)="removeHandler($event)"
+  (add)="addHandler($event)"
+  
+  >
+  <ng-template kendoGridToolbarTemplate>
+    <button kendoGridAddCommand type="button">Add new</button>
+  </ng-template>
+  <kendo-grid-column field="provinceId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+  
+  <kendo-grid-column field="countryName" width="200">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" >
+          <!-- <kendo-dropdownlist 
+           [hidden]="myForm.invalid"
+          [data]="listItems"
+          [value]="countryId"
+         // [defaultItem]="countryId"
+          [textField]="'countryName'"
+          [valueField]="'countryId'"
+          >
+            </kendo-dropdownlist> -->
+<app-country-combo
+>
+fff
+</app-country-combo>
+      </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column field="provinceName" width="200">
+  
+  <ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
+      <input [(ngModel)]="dataItem.provinceName" name="provinceName" class="k-textbox" required/>
+  </ng-template>
+  
+  </kendo-grid-column>
+  
+  
+  <kendo-grid-command-column title="command" width="60">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+        <button kendoGridEditCommand type="button" >Edit</button>
+        <button kendoGridRemoveCommand type="button">Remove</button>
+        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+        <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+    </ng-template>
+  </kendo-grid-command-column>
+  
+  </kendo-grid>
+
+</form>
+
+

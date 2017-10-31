@@ -10,6 +10,7 @@
       "assets": [
         "assets",
          "lib",
+         "css",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -20,7 +21,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss"        
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
