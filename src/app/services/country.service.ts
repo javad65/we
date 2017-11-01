@@ -7,9 +7,9 @@ import { toODataString } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { CountryModel } from './country.model';
-import { BaseService } from '../../shared/services/base.service';
-import { BaseKendoGridService } from '../../shared/services/base-kendo-grid.service';
+import { CountryModel } from '../model/country.model';
+import { BaseService } from './base.service';
+import { BaseKendoGridService } from './base-kendo-grid.service';
 
 @Injectable()
 export class CountryService extends BaseKendoGridService {

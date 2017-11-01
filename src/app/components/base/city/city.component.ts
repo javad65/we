@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-
 import { State } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 
-
-import { ProvinceModel } from './province.model';
-import { CountryModel } from '../country/country.model';
-
-import { BaseKendoGridService } from '../../shared/services/base-kendo-grid.service';
-import { ProvinceService } from './province.service';
-
-import { CountryComboComponent} from '../../components/country-combo/country-combo.component';
-import { BaseKendoGridComponent } from '../../shared/components/base-kendo-grid.component';
-
+import { CityModel } from '../../../model/city.model';
+import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
+import { BaseKendoGridService } from '../../../services/base-kendo-grid.service';
+import { CityService } from '../../../services/city.service';
 
 @Component({
-  selector: 'app-province',
-  templateUrl: './province.component.html',
-  styleUrls: ['./province.component.scss'],
-  providers: [ProvinceService]
-})
-export class ProvinceComponent extends BaseKendoGridComponent {
-  public listItems: Array<CountryModel> ;
-   selectDataItem: CountryModel ;
+  selector: 'app-city',
+  templateUrl: './city.component.html',
+  styleUrls: ['./city.component.scss'],
+  providers: [CityService],
 
-  constructor(service: ProvinceService) {
+})
+export class CityComponent extends BaseKendoGridComponent {
+  public listItems: Array<CityModel>;
+  selectDataItem: CityModel;
+
+  constructor(service: CityService) {
     super(service);
 
-    this.selectDataItem = {countryId: 3 , countryName: 'sfdsfdsfsd'};
+    this.selectDataItem = {
+      cityId: 3,
+      cityName: 'sfdsfdsfsd',
+      provinceId: 1,
+      provinceName: 'ddd'
+    };
 
     // this._countryService = service;
     // this.gridDataResult = service;

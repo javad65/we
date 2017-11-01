@@ -1,7 +1,7 @@
 import { Component, OnInit , Input, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { CountryModel } from '../../base/country/country.model';
-import { CountryComboService } from './country-combo.service';
+import { CountryModel } from '../../../model/country.model';
+import { CountryComboService } from '../../../services/country-combo.service';
 
 @Component({
   selector: 'app-country-combo',

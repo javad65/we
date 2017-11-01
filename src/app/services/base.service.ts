@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
 
-import { OperationResultModel } from '../operation-result.model';
+import { OperationResultModel } from '../model/operation-result.model';
 
 
 @Injectable()

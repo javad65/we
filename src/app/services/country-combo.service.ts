@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
-import { CountryModel } from '../../base/country/country.model';
-import { BaseService } from '../../shared/services/base.service';
+import { CountryModel } from '../model/country.model';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class CountryComboService extends BehaviorSubject<CountryModel[]> {

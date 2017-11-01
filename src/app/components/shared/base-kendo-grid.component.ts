@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { State } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 
-import { BaseKendoGridService } from '../services/base-kendo-grid.service';
+import { BaseKendoGridService } from '../../services/base-kendo-grid.service';
 
 export abstract class BaseKendoGridComponent implements OnInit {
 
