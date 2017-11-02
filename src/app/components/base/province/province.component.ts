@@ -8,7 +8,7 @@ import { ProvinceModel } from '../../../model/province.model';
 import { CountryModel } from '../../../model/country.model';
 
 import { BaseKendoGridService } from '../../../services/base-kendo-grid.service';
-import { ProvinceService } from '../../../services/province.service';
+import { ProvinceService, ProvinceKendoGridService } from '../../../services/province.service';
 
 import { CountryComboComponent} from '../../shared/country-combo/country-combo.component';
 import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
@@ -18,13 +18,13 @@ import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
   selector: 'app-province',
   templateUrl: './province.component.html',
   styleUrls: ['./province.component.scss'],
-  providers: [ProvinceService]
+  providers: [ProvinceKendoGridService]
 })
 export class ProvinceComponent extends BaseKendoGridComponent {
   public listItems: Array<CountryModel> ;
    selectDataItem: CountryModel ;
 
-  constructor(service: ProvinceService) {
+  constructor(service: ProvinceKendoGridService) {
     super(service);
 
     this.selectDataItem = {countryId: 3 , countryName: 'sfdsfdsfsd'};

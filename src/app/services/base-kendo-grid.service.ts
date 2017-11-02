@@ -41,16 +41,18 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   }
 
 
-  public save(data: any, isNew?: boolean) {
+  public save(data: any, isNew?: boolean)  {
     const action = isNew ? this.CREATE_ACTION : this.UPDATE_ACTION;
 
     if (isNew) {
+
       this._baseService.add(data).subscribe(
         d => this.readGrid(),
         err => console.log('error: ', err)
       );
+
     } else {
-      this._baseService.edit(data).subscribe(
+       this._baseService.edit(data).subscribe(
         d => this.readGrid(),
         err => console.log('error: ', err)
       );

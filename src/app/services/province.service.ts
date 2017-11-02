@@ -8,19 +8,43 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { ProvinceModel } from '../model/province.model';
+import { BaseService } from './base.service';
 import { BaseKendoGridService } from './base-kendo-grid.service';
-
+import { UrlHelper } from '../infrastructure/url-helper';
 
 @Injectable()
-export class ProvinceService  extends BaseKendoGridService {
+export class ProvinceService  extends BaseService {
 
   constructor(http: Http) {
-    super(http, 'province');
+    super(http, UrlHelper.PROVINCE_API);
+   }
+
+}
+
+@Injectable()
+export class ProvinceKendoGridService  extends BaseKendoGridService {
+
+  constructor(http: Http) {
+    super(http,  UrlHelper.PROVINCE_API);
    }
 
 
+}
 
 
+@Injectable()
+export class ProvinceComboService extends BehaviorSubject<ProvinceModel[]> {
 
+ _baseService: BaseService;
+    constructor(http: Http ) {
+    super(null);
+    this._baseService = new BaseService(http, UrlHelper.PROVINCE_API + '/');
+   }
+
+   public read(countyId: number): void {
+          this._baseService.get('getItems/' + countyId)
+              .subscribe(x => super.next(x));
+
+   }
 
 }

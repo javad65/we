@@ -5,27 +5,29 @@ import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress
 import { CityModel } from '../../../model/city.model';
 import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
 import { BaseKendoGridService } from '../../../services/base-kendo-grid.service';
-import { CityService } from '../../../services/city.service';
+import { CityService, CityKendoGridService } from '../../../services/city.service';
 
 @Component({
   selector: 'app-city',
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.scss'],
-  providers: [CityService],
+  providers: [CityService, CityKendoGridService],
 
 })
 export class CityComponent extends BaseKendoGridComponent {
   public listItems: Array<CityModel>;
   selectDataItem: CityModel;
 
-  constructor(service: CityService) {
+  constructor(service: CityKendoGridService) {
     super(service);
 
     this.selectDataItem = {
       cityId: 3,
       cityName: 'sfdsfdsfsd',
       provinceId: 1,
-      provinceName: 'ddd'
+      provinceName: 'ddd',
+      countryId: 1,
+      countryName: 'dsfsdlkjf'
     };
 
     // this._countryService = service;

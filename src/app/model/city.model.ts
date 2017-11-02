@@ -5,4 +5,7 @@ export interface CityModel {
     provinceId: number;
     provinceName: string;
 
+    countryId: number;
+    countryName: string;
+
 }

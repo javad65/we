@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions , RequestMethod , URLSearchParams} from '@angular/http';
+import { Http, Response, Headers, RequestOptions, RequestMethod, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
@@ -9,19 +9,19 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
 
+import { UrlHelper } from '../infrastructure/url-helper';
 import { OperationResultModel } from '../model/operation-result.model';
 
 
 @Injectable()
-export  class BaseService  {
+export class BaseService {
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSONP_CALLBACK';
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSON_CALLBACK';
-  private BASE_URL = 'http://localhost/Startup/api/';
+  private BASE_URL= UrlHelper.BASE_URL;
   public API_URL: string;
   protected _http: Http;
-
-  constructor(http: Http , apiUrl: string   ) {
-
+  protected urlHelper: UrlHelper;
+  constructor(http: Http, apiUrl: string) {
     this._http = http;
     this.API_URL = this.BASE_URL + apiUrl;
   }
@@ -64,16 +64,16 @@ export  class BaseService  {
 
 
 
-  public get( url?: string): Observable<any[]> {
-   const httpUrl = `${this.API_URL}${url}`;
-     return this._http
-       .get(httpUrl)
-       .map(response => response.json());
- }
+  public get(url?: string): Observable<any[]> {
+    const httpUrl = `${this.API_URL}${url}`;
+    return this._http
+      .get(httpUrl)
+      .map(response => response.json());
+  }
 
   public post(model: any, url?: string): Observable<OperationResultModel> {
-     // const body = JSON.stringify(model);
-     const body = new URLSearchParams();
+    // const body = JSON.stringify(model);
+    const body = new URLSearchParams();
     this.appendParams(body, model);
     const httpUrl = `${this.API_URL}${url}`;
 
@@ -81,44 +81,44 @@ export  class BaseService  {
       {
         'Accept': 'application/json',
         // 'Content-Type': 'application/json',
-         'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       });
 
     const options = new RequestOptions({
-      headers: headers ,
+      headers: headers,
       // params : body
     });
 
 
     const that = this;
     return this._http.post(httpUrl, body, options)
-    //  .map(this.extractData)
-    .map(res => {
-      const b = res.json();
-      // const r = body.fields || {};
-       that.operationHandling(b  );
-    })
+      //  .map(this.extractData)
+      .map(res => {
+        const b = res.json();
+        // const r = body.fields || {};
+        that.operationHandling(b);
+      })
       .catch(this.handleError);
 
 
 
-//     const requestoptions = new RequestOptions({
-//       method: RequestMethod.Post,
-//       url: httpUrl,
-//       headers: headers,
-//       body: body,
-//       params: body,
-//   });
-//   return this._http  .request(new Request(requestoptions))
-//   .map(this.extractData)
-//   .catch(this.handleError);
-// // }
+    //     const requestoptions = new RequestOptions({
+    //       method: RequestMethod.Post,
+    //       url: httpUrl,
+    //       headers: headers,
+    //       body: body,
+    //       params: body,
+    //   });
+    //   return this._http  .request(new Request(requestoptions))
+    //   .map(this.extractData)
+    //   .catch(this.handleError);
+    // // }
 
   }
 
 
   public put(model: any, url?: string): Observable<OperationResultModel> {
-  const body = JSON.stringify(model);
+    const body = JSON.stringify(model);
     //  const body = new URLSearchParams();
     // this.appendParams(body, model);
     const httpUrl = `${this.API_URL}${url}`;
@@ -126,18 +126,18 @@ export  class BaseService  {
     const headers = new Headers(
       {
         'Accept': 'application/json',
-         'Content-Type': 'application/json;',
+        'Content-Type': 'application/json;',
         // 'Content-Type': 'application/x-www-form-urlencoded'
       });
 
-  const options = new RequestOptions({headers: headers });
-  const that = this;
+    const options = new RequestOptions({ headers: headers });
+    const that = this;
     return this._http.put(httpUrl, body, options)
-    //  .map(this.extractData)
+      //  .map(this.extractData)
       .map(res => {
         const b = res.json();
         // const r = body.fields || {};
-         that.operationHandling(b  );
+        that.operationHandling(b);
       })
       .catch(this.handleError);
   }
@@ -171,7 +171,7 @@ export  class BaseService  {
   }
 
 
-  private appendParams(params: URLSearchParams, obj: any)  {
+  private appendParams(params: URLSearchParams, obj: any) {
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         params.append(key, obj[key]);
@@ -184,18 +184,18 @@ export  class BaseService  {
   }
 
 
-  public operationHandling(operation: OperationResultModel, successFunc?: any, errorFunc?: any ): void {
+  public operationHandling(operation: OperationResultModel, successFunc?: any, errorFunc?: any): void {
 
-    if ( operation.error ) {
-       alert(operation.errorMessage);
-       if ( errorFunc) {
-         errorFunc();
-       }
-     }
+    if (operation.error) {
+      alert(operation.errorMessage);
+      if (errorFunc) {
+        errorFunc();
+      }
+    }
 
-     if ( successFunc) {
-     successFunc(operation.result );
-     }
+    if (successFunc) {
+      successFunc(operation.result);
+    }
 
   }
 

@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { RTL } from '@progress/kendo-angular-l10n';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DialogModule } from '@progress/kendo-angular-dialog';
-import { RTL } from '@progress/kendo-angular-l10n';
+import { RippleModule } from '@progress/kendo-angular-ripple';
 
 import { AppRoutingModule } from './app-routing.module';
 // // modules
@@ -36,7 +38,8 @@ import { BaseKendoGridService } from './services/base-kendo-grid.service';
 import { CountryService } from './services/country.service';
 import { CountryComboService } from './services/country-combo.service';
 import { ProvinceService } from './services/province.service';
-import { CityService } from './services/city.service';
+import { CityService, CityKendoGridService } from './services/city.service';
+import { ProvinceComboComponent } from './components/shared/province-combo/province-combo.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { CityService } from './services/city.service';
     CompanyTypeComponent,
     ProvinceComponent,
     ScaleComponent,
-    CityDetailComponent
+    CityDetailComponent,
+    ProvinceComboComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,7 @@ import { CityService } from './services/city.service';
     GridModule,
     DropDownsModule,
     DialogModule,
+    RippleModule,
 
     // BaseModule,
     // UnitModule,

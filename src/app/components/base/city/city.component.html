@@ -1,6 +1,5 @@
-  
-<app-city-detail></app-city-detail>
 
+<app-city-detail #detailDialog ></app-city-detail>
 
 <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
   
@@ -20,20 +19,22 @@
   
   >
   <ng-template kendoGridToolbarTemplate>
-    <button kendoGridAddCommand type="button">Add new</button>
+    <button  
+    (click)="detailDialog.openDialog()"
+    type="button">Add new</button>
   </ng-template>
   <kendo-grid-column field="provinceId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
   
   <kendo-grid-column field="countryName" width="200">
       <ng-template kendoGridEditTemplate let-dataItem="dataItem" >
          
-        <app-country-combo
+        <!-- <app-country-combo
          name="countryId" 
          [selectedCountry]="dataItem" 
          [(ngModel)]="dataItem.countryId" 
          >
         
-          </app-country-combo>
+          </app-country-combo> -->
 
   </ng-template>
   </kendo-grid-column>
