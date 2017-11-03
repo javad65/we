@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // third party
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
-
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 // Kendo
 import { RTL } from '@progress/kendo-angular-l10n';
@@ -68,6 +68,7 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     HttpModule,
 
     SnotifyModule,
+    Ng4LoadingSpinnerModule,
 
     // Register the kendo modules
     BrowserAnimationsModule,

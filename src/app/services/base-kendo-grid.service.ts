@@ -9,10 +9,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { State } from '@progress/kendo-data-query';
 
 import { BaseService } from './base.service';
-import {NotifyManager } from '../infrastructure/notify-manager';
+import { NotifyManager } from '../infrastructure/notify-manager';
+import { LoadingManager } from '../infrastructure/loading-manager';
 
 @Injectable()
 export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
+  loading: LoadingManager;
   notify: NotifyManager;
   protected _baseService: BaseService;
   protected _http: Http;
@@ -28,38 +30,55 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   protected REMOVE_ACTION = 'destroy';
 
 
-  constructor(http: Http, apiUrl: string ) {
+  constructor(http: Http, apiUrl: string) {
     super(null);
     this._http = http;
     this._baseService = new BaseService(http, apiUrl);
     this.notify = this._baseService.notify;
+    this.loading = this._baseService.loading;
 
   }
 
 
 
   public readGrid(url?: string): void {
-    this.notify.showError();
+
+    const that = this;
+    this.loading.show();
     this._readGrid(this.state, url)
-      .subscribe(x => super.next(x));
+      .subscribe(x => {
+        super.next(x);
+        that.loading.hide();
+      });
   }
 
 
-  public save(data: any, isNew?: boolean)  {
+  public save(data: any, isNew?: boolean) {
     const action = isNew ? this.CREATE_ACTION : this.UPDATE_ACTION;
-
+    const that = this;
+    this.loading.show();
     if (isNew) {
 
       this._baseService.add(data).subscribe(
-        d => this.readGrid(),
-        err => console.log('error: ', err)
-      );
+        d => {
+          this.readGrid();
+          this.loading.hide();
+        },
+        err => {
+          console.log('error: ', err);
+          this.loading.hide();
+        });
 
     } else {
-       this._baseService.edit(data).subscribe(
-        d => this.readGrid(),
-        err => console.log('error: ', err)
-      );
+      this._baseService.edit(data).subscribe(
+        d => {
+          this.readGrid();
+          this.loading.hide();
+        },
+        err => {
+          console.log('error: ', err);
+          this.loading.hide();
+        });
     }
     // this.reset();
     // this.read();
@@ -80,7 +99,7 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
     const queryStr = `${toDataSourceRequestString(state)}`;
     //  url = url || 'read';
     // var httpUrl=`${this._baseService.API_URL}${url}?${queryStr}`;
-  const  httpUrl = `${this._baseService.API_URL}?${queryStr}`;
+    const httpUrl = `${this._baseService.API_URL}?${queryStr}`;
     return this._http
       .get(httpUrl)
       .share()

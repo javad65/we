@@ -10,17 +10,19 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
 
 
-import {NotifyManager } from '../infrastructure/notify-manager';
+import { NotifyManager } from '../infrastructure/notify-manager';
+import { LoadingManager } from '../infrastructure/loading-manager';
 import { UrlHelper } from '../infrastructure/url-helper';
 import { OperationResultModel } from '../model/operation-result.model';
 
 
 @Injectable()
 export class BaseService {
+  loading: LoadingManager;
   notify: NotifyManager;
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSONP_CALLBACK';
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSON_CALLBACK';
-  private BASE_URL= UrlHelper.BASE_URL;
+  private BASE_URL = UrlHelper.BASE_URL;
   public API_URL: string;
   protected _http: Http;
   protected urlHelper: UrlHelper;
@@ -30,10 +32,11 @@ export class BaseService {
     this.API_URL = this.BASE_URL + apiUrl;
 
     this.notify = NotifyManager.createInstance();
+    this.loading = LoadingManager.createInstance();
 
-  // const rr = ReflectiveInjector.resolveAndCreate([NotifierService]);
-  // const ch = rr.resolveAndCreateChild([NotifierService]);
-  // this.notifier = ch.get(NotifierService);
+    // const rr = ReflectiveInjector.resolveAndCreate([NotifierService]);
+    // const ch = rr.resolveAndCreateChild([NotifierService]);
+    // this.notifier = ch.get(NotifierService);
 
 
   }
@@ -77,10 +80,20 @@ export class BaseService {
 
   public get(url?: string): Observable<any[]> {
 
+    const that = this;
+    this.loading.show();
     const httpUrl = `${this.API_URL}${url}`;
     return this._http
       .get(httpUrl)
-      .map(response => response.json());
+      .map(res => {
+        const b = res.json();
+        that.loading.hide();
+        return b;
+      });
+    // .map(response =>{
+    //    response.json();
+    //   this.loading.show();
+    // });
   }
 
   public post(model: any, url?: string): Observable<OperationResultModel> {
@@ -101,14 +114,15 @@ export class BaseService {
       // params : body
     });
 
-
     const that = this;
+    this.loading.show();
     return this._http.post(httpUrl, body, options)
       //  .map(this.extractData)
       .map(res => {
         const b = res.json();
         // const r = body.fields || {};
         that.operationHandling(b);
+        that.loading.hide();
       })
       .catch(this.handleError);
 
@@ -200,7 +214,7 @@ export class BaseService {
 
     if (operation.error) {
       this.notify.showError(operation.errorMessage);
-     // alert(operation.errorMessage);
+      // alert(operation.errorMessage);
       if (errorFunc) {
         errorFunc();
       }
