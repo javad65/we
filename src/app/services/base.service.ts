@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, ReflectiveInjector, Injector } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestMethod, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -9,21 +9,33 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/share';
 
+
+import {NotifyManager } from '../infrastructure/notify-manager';
 import { UrlHelper } from '../infrastructure/url-helper';
 import { OperationResultModel } from '../model/operation-result.model';
 
 
 @Injectable()
 export class BaseService {
+  notify: NotifyManager;
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSONP_CALLBACK';
   // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSON_CALLBACK';
   private BASE_URL= UrlHelper.BASE_URL;
   public API_URL: string;
   protected _http: Http;
   protected urlHelper: UrlHelper;
+
   constructor(http: Http, apiUrl: string) {
     this._http = http;
     this.API_URL = this.BASE_URL + apiUrl;
+
+    this.notify = NotifyManager.createInstance();
+
+  // const rr = ReflectiveInjector.resolveAndCreate([NotifierService]);
+  // const ch = rr.resolveAndCreateChild([NotifierService]);
+  // this.notifier = ch.get(NotifierService);
+
+
   }
 
 
@@ -63,8 +75,8 @@ export class BaseService {
 
 
 
-
   public get(url?: string): Observable<any[]> {
+
     const httpUrl = `${this.API_URL}${url}`;
     return this._http
       .get(httpUrl)
@@ -187,13 +199,15 @@ export class BaseService {
   public operationHandling(operation: OperationResultModel, successFunc?: any, errorFunc?: any): void {
 
     if (operation.error) {
-      alert(operation.errorMessage);
+      this.notify.showError(operation.errorMessage);
+     // alert(operation.errorMessage);
       if (errorFunc) {
         errorFunc();
       }
     }
 
     if (successFunc) {
+      this.notify.showError();
       successFunc(operation.result);
     }
 

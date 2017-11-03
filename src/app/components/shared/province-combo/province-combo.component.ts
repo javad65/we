@@ -14,22 +14,33 @@ import { BaseComponent } from '../base.component';
     ProvinceComboService,
     {
       provide: NG_VALUE_ACCESSOR,
-      useValue : (c) => { },
-     // useExisting: forwardRef(() => ProvinceComboComponent),
+      useValue: (c) => { },
+      // useExisting: forwardRef(() => ProvinceComboComponent),
       multi: true
     }
   ]
 })
 export class ProvinceComboComponent extends BaseComponent {
-// implements ControlValueAccessor {
+  // implements ControlValueAccessor {
   _service: ProvinceComboService;
   model = <ProvinceModel>{};
 
-@Input() selectedId: number ;
-@Output() valueChanged= new  EventEmitter<number>();
+  @Input()
+  selectedId: number;
+
+  //  private _selectedId: number;
+  // @Input()
+  // set selectedId(value){
+  //   debugger;
+  //   this._selectedId = value ;
+  // }
+
+
+
+  @Output() valueChanged = new EventEmitter<number>();
   private view: Observable<ProvinceModel[]>;
-   constructor(service: ProvinceComboService) {
-   super();
+  constructor(service: ProvinceComboService) {
+    super();
 
     this.view = service;
     this._service = service;
@@ -71,34 +82,34 @@ export class ProvinceComboComponent extends BaseComponent {
 
 
   public onValueChange(value: any): void {
-
+    this.selectedId = value;
     this.valueChanged.emit(value);
-}
+  }
 
-public onSelectionChange(value: any): void {
-  //  this.log("selectionChange", value);
-}
+  public onSelectionChange(value: any): void {
+    //  this.log("selectionChange", value);
+  }
 
-public onFilterChange(filter: any): void {
-   // this.log("filterChange", filter);
-   // this.data = this.source.filter((s) => s.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-}
+  public onFilterChange(filter: any): void {
+    // this.log("filterChange", filter);
+    // this.data = this.source.filter((s) => s.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
+  }
 
-public onOpen(): void {
- //   this.log("open");
-}
+  public onOpen(): void {
+    //   this.log("open");
+  }
 
-public onClose(): void {
-  //  this.log("close");
-}
+  public onClose(): void {
+    //  this.log("close");
+  }
 
-public onFocus(): void {
- //   this.log("focus");
-}
+  public onFocus(): void {
+    //   this.log("focus");
+  }
 
-public onBlur(): void {
-  //  this.log("blur");
-}
+  public onBlur(): void {
+    //  this.log("blur");
+  }
 
 
 

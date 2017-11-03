@@ -31,7 +31,7 @@ export class CityKendoGridService extends BaseKendoGridService {
 
   constructor(http: Http, cityService: CityService) {
     super(http, 'city');
-    this._cityService= cityService;
+    this._cityService =  cityService;
    }
 
 

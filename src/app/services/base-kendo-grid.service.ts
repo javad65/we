@@ -9,9 +9,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { State } from '@progress/kendo-data-query';
 
 import { BaseService } from './base.service';
+import {NotifyManager } from '../infrastructure/notify-manager';
 
 @Injectable()
 export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
+  notify: NotifyManager;
   protected _baseService: BaseService;
   protected _http: Http;
 
@@ -26,16 +28,18 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   protected REMOVE_ACTION = 'destroy';
 
 
-  constructor(http: Http, apiUrl: string) {
+  constructor(http: Http, apiUrl: string ) {
     super(null);
     this._http = http;
     this._baseService = new BaseService(http, apiUrl);
+    this.notify = this._baseService.notify;
 
   }
 
 
 
   public readGrid(url?: string): void {
+    this.notify.showError();
     this._readGrid(this.state, url)
       .subscribe(x => super.next(x));
   }

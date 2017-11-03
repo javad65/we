@@ -18,7 +18,7 @@ export class CityComponent extends BaseKendoGridComponent {
   public listItems: Array<CityModel>;
   selectDataItem: CityModel;
 
-  constructor(service: CityKendoGridService) {
+  constructor(service: CityKendoGridService ) {
     super(service);
 
     this.selectDataItem = {
@@ -33,13 +33,12 @@ export class CityComponent extends BaseKendoGridComponent {
     // this._countryService = service;
     // this.gridDataResult = service;
     // this._countryService.readGrid();
+
+
   }
 
   ngOnInitHandler() {
     this.refresh();
-    // .sub;
-
-
   }
 
   private refresh(): void {

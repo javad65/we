@@ -4,9 +4,12 @@ import 'rxjs/add/operator/map';
 import { State } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 
+import {NotifyManager } from '../../infrastructure/notify-manager';
+
 import { BaseKendoGridService } from '../../services/base-kendo-grid.service';
 
 export abstract class BaseKendoGridComponent implements OnInit {
+  protected  notify: NotifyManager;
 
     protected gridDataResult: Observable<GridDataResult>;
     protected state: State = {
@@ -19,8 +22,8 @@ export abstract class BaseKendoGridComponent implements OnInit {
 
     constructor(service: BaseKendoGridService) {
         this._service = service;
-
         this.gridDataResult = service;
+       this.notify = NotifyManager.createInstance();
     }
 
     abstract ngOnInitHandler();

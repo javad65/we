@@ -23,11 +23,17 @@
  
 
 <app-province-combo 
+([selectedId])="model.provinceId"
 (valueChanged)="onProvinceChange($event)"
  name="model.provinceId"
- [(ngModel)]="model.provinceId">
+ 
+ >
 
 </app-province-combo>
+<!-- [(ngModel)]="model.provinceId" -->
+<!-- (valueChanged)="onProvinceChange($event)"
+
+-->
 <!--   
       <label class="k-form-field">
           <span>کشور</span>

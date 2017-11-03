@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// third party
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
+
+// Kendo
 import { RTL } from '@progress/kendo-angular-l10n';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
@@ -45,6 +49,7 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
   declarations: [
     // CountryComboComponent,
     AppComponent,
+
     DeleteConfirmComponent,
     // ,PageNotFoundComponent
     CountryComboComponent,
@@ -62,6 +67,8 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     FormsModule,
     HttpModule,
 
+    SnotifyModule,
+
     // Register the kendo modules
     BrowserAnimationsModule,
     ButtonsModule,
@@ -78,6 +85,9 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     AppRoutingModule
   ],
   providers: [
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService,
+
     BaseService,
     BaseKendoGridService,
 
@@ -91,7 +101,13 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class AppModule { }
+export class AppModule {
+  static injector: Injector;
+
+  constructor (injector: Injector) {
+    AppModule.injector = injector;
+  }
+ }
 
 
 
