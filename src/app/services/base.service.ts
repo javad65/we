@@ -81,13 +81,11 @@ export class BaseService {
   public get(url?: string): Observable<any[]> {
 
     const that = this;
-    this.loading.show();
     const httpUrl = `${this.API_URL}${url}`;
     return this._http
       .get(httpUrl)
       .map(res => {
         const b = res.json();
-        that.loading.hide();
         return b;
       });
     // .map(response =>{
@@ -115,14 +113,14 @@ export class BaseService {
     });
 
     const that = this;
-    this.loading.show();
+   // this.loading.show();
     return this._http.post(httpUrl, body, options)
       //  .map(this.extractData)
       .map(res => {
         const b = res.json();
         // const r = body.fields || {};
         that.operationHandling(b);
-        that.loading.hide();
+      //  that.loading.hide();
       })
       .catch(this.handleError);
 
@@ -193,6 +191,7 @@ export class BaseService {
 
   protected handleError(error: Response): Observable<any> {
     console.error('observable error: ', error);
+ //   this.loading.hide();
     return Observable.throw(error.statusText);
   }
 
@@ -214,6 +213,7 @@ export class BaseService {
 
     if (operation.error) {
       this.notify.showError(operation.errorMessage);
+      this.loading.hide();
       // alert(operation.errorMessage);
       if (errorFunc) {
         errorFunc();
@@ -222,6 +222,7 @@ export class BaseService {
 
     if (successFunc) {
       this.notify.showError();
+      this.loading.hide();
       successFunc(operation.result);
     }
 

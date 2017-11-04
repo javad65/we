@@ -44,11 +44,9 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   public readGrid(url?: string): void {
 
     const that = this;
-    this.loading.show();
     this._readGrid(this.state, url)
       .subscribe(x => {
         super.next(x);
-        that.loading.hide();
       });
   }
 
