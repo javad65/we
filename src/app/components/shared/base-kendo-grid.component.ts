@@ -42,7 +42,7 @@ export abstract class BaseKendoGridComponent implements OnInit {
 
         this.editedRowIndex = rowIndex;
         this.editedItem = Object.assign({}, dataItem);
-        this._service.save(dataItem, false);
+        // this._service.save(dataItem, false);
         sender.editRow(rowIndex);
     }
 

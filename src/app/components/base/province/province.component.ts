@@ -27,8 +27,6 @@ export class ProvinceComponent extends BaseKendoGridComponent {
   constructor(service: ProvinceKendoGridService) {
     super(service);
 
-    this.selectDataItem = {countryId: 3 , countryName: 'sfdsfdsfsd'};
-
     // this._countryService = service;
     // this.gridDataResult = service;
     // this._countryService.readGrid();

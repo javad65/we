@@ -15,7 +15,7 @@ import { BaseKendoGridService } from './base-kendo-grid.service';
 export class CountryService extends BaseKendoGridService {
 
   constructor(http: Http) {
-    super(http, 'country/');
+    super(http, 'country');
 
   }
 

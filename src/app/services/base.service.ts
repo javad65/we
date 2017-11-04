@@ -166,6 +166,27 @@ export class BaseService {
       .catch(this.handleError);
   }
 
+  public deleteRequest(id: any, url?: string): Observable<OperationResultModel> {
+    const httpUrl = `${this.API_URL}${url}/${id}`;
+    const headers = new Headers(
+      {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;',
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+      });
+
+    const options = new RequestOptions({ headers: headers });
+    const that = this;
+    return this._http.delete(httpUrl, options)
+      //  .map(this.extractData)
+      .map(res => {
+        const b = res.json();
+        // const r = body.fields || {};
+        that.operationHandling(b);
+      })
+      .catch(this.handleError);
+  }
+
 
   public add(model: any): Observable<OperationResultModel> {
     // return this.post(model, 'Add');
@@ -175,7 +196,7 @@ export class BaseService {
     return this.post(model, '/Edit' /*, 'Edit'*/);
   }
   public delete(id: number): Observable<OperationResultModel> {
-    return this.post(id, '' /* 'Delete/' + id*/);
+    return this.post(id, '/remove/' + id /* 'Delete/' + id*/);
   }
 
 
@@ -190,6 +211,7 @@ export class BaseService {
   // }
 
   protected handleError(error: Response): Observable<any> {
+
     console.error('observable error: ', error);
  //   this.loading.hide();
     return Observable.throw(error.statusText);
