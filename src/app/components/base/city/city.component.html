@@ -20,6 +20,7 @@
   >
   <ng-template kendoGridToolbarTemplate>
     <button  
+    class="k-button "
     (click)="detailDialog.openDialog()"
     type="button">Add new</button>
   </ng-template>
@@ -59,7 +60,9 @@
   <kendo-grid-command-column title="command" width="60">
     <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
   
-        <button kendoGridEditCommand1 type="button" (click)="detailDialog.openDialogById(dataItem.cityId)" >Edit</button>
+        <button kendoGridEditCommand1 type="button"         
+        class="k-button k-grid-edit-command"
+        (click)="detailDialog.openDialogById(dataItem.cityId)" >Edit</button>
         <button kendoGridRemoveCommand type="button">Remove</button>
         <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
         <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>

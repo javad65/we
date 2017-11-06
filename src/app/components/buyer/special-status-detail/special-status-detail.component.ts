@@ -10,7 +10,8 @@ import { OperationResultModel } from '../../../model/operation-result.model';
 @Component({
   selector: 'app-special-status-detail',
   templateUrl: './special-status-detail.component.html',
-  styleUrls: ['./special-status-detail.component.scss']
+  styleUrls: ['./special-status-detail.component.scss'],
+  providers: [SpecialStatusService]
 })
 export class SpecialStatusDetailComponent extends BaseComponent {
   _service: SpecialStatusService;
@@ -67,13 +68,13 @@ export class SpecialStatusDetailComponent extends BaseComponent {
   }
 
   public onSubmit(form) {
-  
+
 
   }
 
 
   public onProvinceChange(value: any) {
-  //  this.model.provinceId = <number>value;
+    //  this.model.provinceId = <number>value;
   }
 
 

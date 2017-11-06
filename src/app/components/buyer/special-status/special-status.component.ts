@@ -10,7 +10,8 @@ import { SpecialStatusKendoGridService } from '../../../services/special-status.
 @Component({
   selector: 'app-special-status',
   templateUrl: './special-status.component.html',
-  styleUrls: ['./special-status.component.scss']
+  styleUrls: ['./special-status.component.scss'],
+  providers: [SpecialStatusKendoGridService]
 })
 export class SpecialStatusComponent extends BaseKendoGridComponent {
 
