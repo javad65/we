@@ -1,12 +1,4 @@
-
-<kendo-dialog 
-[width]="400" 
-[height]="400" 
-[title]="Status" 
-(close)="onClose()"
- *ngIf="opened"
- style="text-align:right;"
- >
+<kendo-dialog [width]="400" [height]="400" [title]="Status" (close)="onClose()" *ngIf="opened" style="text-align:right;">
 
   <kendo-dialog-titlebar>
     <div style="font-size: 18px; line-height: 1.3em;">
@@ -15,26 +7,18 @@
   </kendo-dialog-titlebar>
 
 
-  <form class="k-form k-rtl" 
-  #detailForm="ngForm" 
-  (ngSubmit)="onSubmit(detailForm.form)"
-  style="text-align:right;"
-  >
- 
+  <form class="k-form k-rtl" #detailForm="ngForm" (ngSubmit)="onSubmit(detailForm.form)" style="text-align:right;">
 
-<app-province-combo 
-([selectedId])="model.provinceId"
-(valueChanged)="onProvinceChange($event)"
- name="model.provinceId"
- 
- >
 
-</app-province-combo>
-<!-- [(ngModel)]="model.provinceId" -->
-<!-- (valueChanged)="onProvinceChange($event)"
+    <app-province-combo ([selectedId])="model.provinceId" ([ngModel])="model.provinceId" (valueChanged)="onProvinceChange($event)"
+      name="model.provinceId">
+
+    </app-province-combo>
+    <!-- [(ngModel)]="model.provinceId" -->
+    <!-- (valueChanged)="onProvinceChange($event)"
 
 -->
-<!--   
+    <!--   
       <label class="k-form-field">
           <span>کشور</span>
       <app-country-combo
@@ -60,26 +44,17 @@
 
     <label class="k-form-field">
       <span>نام شهر</span>
-      <input class="k-textbox"
-       [(ngModel)]="model.cityName"
-        name="cityName"
-       placeholder="Your Name" required />
+      <input class="k-textbox" [(ngModel)]="model.cityName" name="cityName" placeholder="Your Name" required />
     </label>
- 
+
 
   </form>
 
   <kendo-dialog-actions>
 
-    <button kendoButton 
-    class="k-button " 
-    (click)="onOk()" 
-    [disabled]="!detailForm.valid" 
-    primary="true"
-    type="submit">تایید</button>
+    <button kendoButton class="k-button " (click)="onOk()" [disabled]="!detailForm.valid" primary="true" type="submit">تایید</button>
 
     <button kendoButton class="k-button " (click)="onClose()">انصراف</button>
   </kendo-dialog-actions>
 
-</kendo-dialog> 
-
+</kendo-dialog>

@@ -8,3 +8,9 @@
 .k-form, .k-form-inline{
     padding: 5px;
 }
+
+.k-form fieldset legend,
+.k-form-inline fieldset legend{
+text-align: right;
+border-bottom: 0;
+}

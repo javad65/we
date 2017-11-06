@@ -3,4 +3,5 @@ export class UrlHelper {
     static COUTRY_API= 'country';
     static PROVINCE_API= 'province';
     static CITY_API= 'city';
+    static SpecialStatus_API= 'specialstatus';
 }

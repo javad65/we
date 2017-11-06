@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'DroidNaskh-Bold';
+  src: url('../fonts/DroidNaskh-Bold.eot');
+   src: url('./fonts/DroidNaskh-Bold.eot?#iefix') format('embedded-opentype'),
+   url('./fonts/DroidNaskh-Bold.woff') format('woff'),
+   url('./fonts/DroidNaskh-Bold.ttf') format('truetype');
+   /* url('fontname.svg#fontname') format('svg')  */
+   
+     font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DroidNaskh-Regular';
+   src: url('../fonts//DroidNaskh-Regular.eot');
+  src: url('../fonts/DroidNaskh-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/DroidNaskh-Regular.woff') format('woff'),
+  url('../fonts/DroidNaskh-Regular.ttf') format('truetype');
+     font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
 *,
 *::before,
 *::after {

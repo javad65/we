@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { GridDataResult } from '@progress/kendo-angular-grid';
@@ -7,36 +7,28 @@ import { toODataString } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { CityModel } from '../model/city.model';
+import { ProvinceModel } from '../model/province.model';
 import { BaseService } from './base.service';
 import { BaseKendoGridService } from './base-kendo-grid.service';
-import { OperationResultModel } from '../model/operation-result.model';
-
+import { UrlHelper } from '../infrastructure/url-helper';
 
 @Injectable()
-export class CityService extends BaseService {
+export class SpecialStatusService  extends BaseService {
 
   constructor(http: Http) {
-    super(http, 'city');
+    super(http, UrlHelper.SpecialStatus_API);
    }
 
-
-
 }
-
 
 
 
 @Injectable()
-export class CityKendoGridService extends BaseKendoGridService {
-  _cityService: CityService;
+export class SpecialStatusKendoGridService  extends BaseKendoGridService {
 
-  constructor(http: Http, cityService: CityService) {
-    super(http, 'city');
-    this._cityService =  cityService;
+  constructor(http: Http) {
+    super(http,  UrlHelper.SpecialStatus_API);
    }
 
 
-
 }
-

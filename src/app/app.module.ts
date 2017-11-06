@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Injector } from '@angular/core';
+import { LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import localeFa from '@angular/common/locales/fa';
+
 
 // third party
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
@@ -15,6 +17,22 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { CalendarModule } from '@progress/kendo-angular-dateinputs';
+/* Loading CLDR data */
+import { load } from '@progress/kendo-angular-intl';
+// load(
+//     require('cldr-data/supplemental/likelySubtags.json'),
+//     require('cldr-data/supplemental/currencyData.json'),
+//     require('cldr-data/supplemental/weekData.json'),
+
+//     require('cldr-data/main/es/numbers.json'),
+//     require('cldr-data/main/es/currencies.json'),
+//     require('cldr-data/main/es/dateFields.json'),
+//     require('cldr-data/main/es/ca-gregorian.json'),
+//     require('cldr-data/main/es/timeZoneNames.json')
+// );
+
 
 import { AppRoutingModule } from './app-routing.module';
 // // modules
@@ -45,6 +63,13 @@ import { ProvinceService } from './services/province.service';
 import { CityService, CityKendoGridService } from './services/city.service';
 import { ProvinceComboComponent } from './components/shared/province-combo/province-combo.component';
 
+
+import { SpecialStatusComponent } from './components/buyer/special-status/special-status.component';
+import { SpecialStatusDetailComponent } from './components/buyer/special-status-detail/special-status-detail.component';
+import { PersonComponent } from './components/buyer/person/person.component';
+import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
+import { PersonSpecialStatusComponent } from './components/buyer/person-special-status/person-special-status.component';
+
 @NgModule({
   declarations: [
     // CountryComboComponent,
@@ -60,7 +85,13 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     ProvinceComponent,
     ScaleComponent,
     CityDetailComponent,
-    ProvinceComboComponent
+    ProvinceComboComponent,
+
+    SpecialStatusComponent,
+    SpecialStatusDetailComponent,
+    PersonComponent,
+    PersonDetailComponent,
+    PersonSpecialStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +108,8 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
     DropDownsModule,
     DialogModule,
     RippleModule,
+    DateInputsModule,
+    CalendarModule,
 
     // BaseModule,
     // UnitModule,
@@ -87,6 +120,7 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
   ],
   providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+   // { provide: LOCALE_ID, useValue: 'fa' },
     SnotifyService,
 
     BaseService,

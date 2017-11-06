@@ -20,7 +20,8 @@ import { BaseComponent } from '../base.component';
     }
   ]
 })
-export class ProvinceComboComponent extends BaseComponent {
+export class ProvinceComboComponent implements ControlValueAccessor {
+// extends BaseComponent {
   // implements ControlValueAccessor {
   _service: ProvinceComboService;
   model = <ProvinceModel>{};
@@ -40,35 +41,11 @@ export class ProvinceComboComponent extends BaseComponent {
   @Output() valueChanged = new EventEmitter<number>();
   private view: Observable<ProvinceModel[]>;
   constructor(service: ProvinceComboService) {
-    super();
+   // super();
 
     this.view = service;
     this._service = service;
   }
-
-  // _value: number ;
-
-  // writeValue(obj: any): void {
-  //   debugger;
-  //   this._value = obj;
-  //   // throw new Error('Method not implemented.');
-  // }
-  // onChange = (_) => {};
-  // onTouched = () => {};
-  // registerOnChange(fn: any): void {
-  //   debugger;
-  //   this.onChange = fn;
-  //  // throw new Error('Method not implemented.');
-  // }
-  // registerOnTouched(fn: any): void {
-  //   debugger;
-  //   this.onTouched = fn;
-  //  // throw new Error('Method not implemented.');
-  // }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   throw new Error('Method not implemented.');
-  // }
-
 
   ngOnInitHandler() {
   }
@@ -82,7 +59,8 @@ export class ProvinceComboComponent extends BaseComponent {
 
 
   public onValueChange(value: any): void {
-    this.selectedId = value;
+    // this.selectedId = value;
+    this.propagateChange(value);
     this.valueChanged.emit(value);
   }
 
@@ -112,5 +90,21 @@ export class ProvinceComboComponent extends BaseComponent {
   }
 
 
+
+
+
+  writeValue(obj: any): void {
+    if (obj) {
+      this.selectedId = obj;
+    }
+  }
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+  }
+  setDisabledState?(isDisabled: boolean): void {
+  }
+  propagateChange = (_: any) => { };
 
 }
