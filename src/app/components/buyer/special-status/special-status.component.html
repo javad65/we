@@ -1,70 +1,121 @@
-
-<app-special-status-detail #detailDialog ></app-special-status-detail>
-
-<form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
-  
-  <kendo-grid
-  [data]="gridDataResult | async"
-  [pageSize]="state.take"
-  [skip]="state.skip"
-  [sort]="state.sort"
-  [sortable]="true"
-  [pageable]="true"
-  [selectable]="true"
-  [scrollable]="'none'"
-  (dataStateChange)="dataStateChange($event)"
-  (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
-  (save)="saveHandler($event)" (remove)="removeHandler($event)"
-  (add)="addHandler($event)"
-  
-  >
-  <ng-template kendoGridToolbarTemplate>
-    <button  
-    class="k-button "
-    (click)="detailDialog.openDialog()"
-    type="button">Add new</button>
-  </ng-template>
-  <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
-  
- 
-  <kendo-grid-column field="name" width="200">
-    <ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
-      <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
-  </ng-template>
-</kendo-grid-column >
- 
-  <kendo-grid-column field="canMoreSelect" width="200">
-    <ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
-      <input [(ngModel)]="dataItem.canMoreSelect" 
-      name="canMoreSelect" 
-      class="k-textbox" required/>
-  </ng-template>
-</kendo-grid-column >
+<div class="row">
+  <div class="col-md-6">
 
 
-<kendo-grid-column field="statusType" width="200">
-<ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
-    <input [(ngModel)]="dataItem.statusType"
-     name="statusType" 
-     class="k-check-box" />
-  </ng-template>
-</kendo-grid-column>
-  
-  <kendo-grid-command-column title="command" width="60">
-    <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
-  
-        <button kendoGridEditCommand1 
-        type="button" 
-        class="k-button k-grid-edit-command"
-        (click)="detailDialog.openDialogById(dataItem.specialStatusId)" >Edit</button>
-        <button kendoGridRemoveCommand type="button">Remove</button>
-        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
-        <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
-    </ng-template>
-  </kendo-grid-command-column>
-  
-  </kendo-grid>
+    <section class="section-item">
 
-</form>
+      <form class="k-form k-rtl" #detailStatusForm="ngForm" (ngSubmit)="statusSubmit(detailStatusForm.form)" style="text-align:right;">
+        <label class="k-form-field">
+          <span>نام شهر</span>
+          <input class="k-textbox" name="statusName" placeholder="Your Name" required />
+        </label>
+        <!-- [(ngModel)]="model.name"  -->
+
+        <label class="k-form-field">
+          <input type="checkbox" id="auth-2fa" class="k-checkbox" checked="checked">
+          <label class="k-checkbox-label" for="auth-2fa">
+            Enable two-factor authentication</label>
+        </label>
+        <!-- [(ngModel)]="model.statusType"  -->
+
+        <label class="k-form-field">
+
+          <input type="checkbox" id="auth-2fadd" class="k-checkbox" checked="checked">
+          <label class="k-checkbox-label" for="auth-2fadd">Enable two-factor authentication</label>
+        </label>
+
+        <!-- [(ngModel)]="model.canMoreSelect"  -->
 
 
+      </form>
+
+
+
+      <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
+
+        <kendo-grid [data]="gridDataResult | async" 
+        [pageSize]="state.take" 
+        [skip]="state.skip" 
+        [sort]="state.sort" 
+        [sortable]="true"
+          [pageable]="true" 
+          [selectable]="true" 
+          [scrollable]="'none'" 
+          (dataStateChange)="dataStateChange($event)" 
+         (selectionChange) ="statusDetail.setStatusItem($event)"
+         
+          (edit)="editHandler($event)"
+          (cancel)="cancelHandler($event)" 
+          (save)="saveHandler($event)" 
+          (remove)="removeHandler($event)"
+           (add)="addHandler($event)">
+
+           <!--
+              (selectionChange) ="onSelectionChange($event)"
+              [rowSelected]="isRowSelected" 
+            [selectedKeys]="mySelection"
+           (selectedKeysChange)="onSelectedKeysChange($event)"
+            -->
+          <!-- <ng-template kendoGridToolbarTemplate>
+            <button class="k-button " (click)="detailDialog.openDialog()" type="button">Add new</button>
+          </ng-template> -->
+          <!-- <kendo-grid-checkbox-column>
+              <ng-template kendoGridHeaderTemplate>
+                  <input class="k-checkbox" id="selectAllCheckboxId" kendoGridSelectAllCheckbox
+                      [state]="selectAllState"
+                      (selectAllChange)="onSelectAllChange($event)">
+                  <label class="k-checkbox-label" for="selectAllCheckboxId"></label>
+              </ng-template>
+          </kendo-grid-checkbox-column>
+         -->
+          <kendo-grid-column field="specialStatusId"
+           width="130" [hidden]="false" [filterable]="false" [sortable]="false"></kendo-grid-column>
+
+
+          <kendo-grid-column field="name" width="200" [filterable]="true">
+            <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+              <input [(ngModel)]="dataItem.name" name="name" 
+              class="k-textbox" required/>
+            </ng-template>
+          </kendo-grid-column>
+
+          <kendo-grid-column field="canMoreSelect" width="30">
+            <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+              <input [(ngModel)]="dataItem.canMoreSelect" name="canMoreSelect" class="k-textbox" required/>
+            </ng-template>
+          </kendo-grid-column>
+
+
+          <kendo-grid-column field="statusType" width="30">
+            <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+              <input [(ngModel)]="dataItem.statusType" name="statusType" class="k-check-box" />
+            </ng-template>
+          </kendo-grid-column>
+
+          <kendo-grid-command-column title="command" width="200">
+            <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
+
+              <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command" (click)="detailDialog.openDialogById(dataItem.specialStatusId)">Edit</button>
+              <button kendoGridRemoveCommand type="button">Remove</button>
+              <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+              <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+            </ng-template>
+          </kendo-grid-command-column>
+
+        </kendo-grid>
+
+      </form>
+
+
+    </section>
+  </div>
+  <div class="col-md-6">
+
+    <section class="section-item">
+
+      <app-special-status-detail #statusDetail>
+      </app-special-status-detail>
+    </section>
+
+  </div>
+</div>
