@@ -1,6 +1,10 @@
-.section-item{
-    border: 1px #cecece solid;
-    border-radius: 10px;
-    padding: 3px;
+.section-col{
+    padding: 5px 7px;
 
+    .section-item{
+        border: 1px #cecece solid;
+        border-radius: 10px;
+        padding: 3px;
+    
+    }
 }

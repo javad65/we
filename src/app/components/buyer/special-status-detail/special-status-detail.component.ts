@@ -26,7 +26,7 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
   _service: SpecialStatusValueKendoGridService;
   @Input() specialStatusId?: number;
 
-  model: SpecialStatusValueModel;
+  model = <SpecialStatusValueModel>{};
   public opened = false;
   constructor(service: SpecialStatusValueKendoGridService) {
     super(service);
@@ -50,7 +50,7 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
   // }
 
   public setStatusItem(e: SelectionEvent) {
-    debugger;
+
     this.model.specialStatusId = 0;
     this.model.descreption = '';
     this.model.haveMoreDetial = false;
@@ -60,7 +60,6 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
 
     if (e.selectedRows.length > 0) {
       const m = <SpecialStatusModel>e.selectedRows[0].dataItem;
-
       this.model.specialStatusId = m.specialStatusId;
       this.model.specialStatusName = m.name;
       this.refresh();

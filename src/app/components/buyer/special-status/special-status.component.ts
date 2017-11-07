@@ -19,7 +19,7 @@ import { SpecialStatusKendoGridService } from '../../../services/special-status.
   providers: [SpecialStatusKendoGridService]
 })
 export class SpecialStatusComponent extends BaseKendoGridComponent {
-  model: SpecialStatusModel;
+  model = <SpecialStatusModel>{};
 
   constructor(service: SpecialStatusKendoGridService) {
     super(service);
@@ -41,10 +41,9 @@ export class SpecialStatusComponent extends BaseKendoGridComponent {
   }
 
   public onSelectionChange(e: SelectionEvent) {
-    debugger;
     if (e.selectedRows.length > 0) {
       const m = <SpecialStatusModel>e.selectedRows[0].dataItem;
-    
+
 
     }
   }

@@ -3,14 +3,10 @@
 (ngSubmit)="onSubmit(detailValueForm.form)" 
 style="text-align:right;">
 
-
-
-<label class="k-form-field">
-    <span>گروه وضعیت خاص</span>
-    <input class="k-textbox" name="specialStatusName" 
-    [(ngModel)]="model.specialStatusName" 
-   />
-  </label>
+<p>
+  <span>گروه وضعیت خاص : </span>
+   <b> {{model.specialStatusName}} </b>
+</p>
 
   <label class="k-form-field">
     <span>نام وضعیت خاص</span>
@@ -30,7 +26,7 @@ style="text-align:right;">
   <label class="k-form-field">
       <span> عنوان سایر مقادیر</span>
       <input class="k-textbox" name="moreSpecialStatusLable" 
-      placeholder="عنوان سایر مقادیر"  />
+     placeholder="عنوان سایر مقادیر"  />
     </label>
     <!-- [(ngModel)]="model.moreSpecialStatusLable"  -->
 
