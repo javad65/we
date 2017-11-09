@@ -90,10 +90,10 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
     //     .subscribe(() => this.read(), () => this.read());
   }
 
-  public remove(data: any) {
+  public remove(id: number) {
     const that = this;
     this.loading.show();
-    this._baseService.delete(data.countryId).subscribe(
+    this._baseService.delete(id).subscribe(
       d => {
         that.readGrid();
         that.loading.hide();

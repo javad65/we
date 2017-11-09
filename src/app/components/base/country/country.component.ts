@@ -10,7 +10,7 @@ import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress
 import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
 
 import { BaseKendoGridService } from '../../../services/base-kendo-grid.service';
-import { CountryService } from '../../../services/country.service';
+import { CountryKendoGridService } from '../../../services/country.service';
 import { CountryModel } from '../../../model/country.model';
 
 
@@ -31,7 +31,7 @@ export class CountryComponent extends BaseKendoGridComponent {
   // private editedItem: CountryModel;
   // private _countryService: CountryService;
 
-  constructor(service: CountryService) {
+  constructor(service: CountryKendoGridService) {
     super(service);
 
     // this._countryService = service;

@@ -23,7 +23,7 @@
     (edit)="editHandler($event)"
     (cancel)="cancelHandler($event)" 
     (save)="saveHandler($event)" 
-    (remove)="removeHandler($event)" 
+    (remove)="removeHandler($event.dataItem.specialStatusValueId)" 
     (add)="addHandler($event)">
     <!-- [pageable]="true"  -->
     <!-- <ng-template kendoGridToolbarTemplate>
@@ -32,29 +32,29 @@
     <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
 
 
-    <kendo-grid-column field="name" width="200">
+    <kendo-grid-column field="name" title="نام وضعیت" width="200">
       <ng-template kendoGridEditTemplate let-dataItem="dataItem">
         <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
       </ng-template>
     </kendo-grid-column>
 
-    <kendo-grid-column field="canMoreSelect" width="30">
-      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-        <input [(ngModel)]="dataItem.canMoreSelect" name="canMoreSelect" class="k-textbox" required/>
+    <kendo-grid-column field="canMoreSelect" 
+    title="سایر مقادیر" width="30">
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+        <p *ngIf="dataItem.haveMoreDetial" class="text-center">
+          <span class="fa fa-check text-success"></span>
+        </p>
+        <p *ngIf="!dataItem.haveMoreDetial" class="text-center">
+          <span class="fa fa-close  text-danger"></span>
+        </p>
+
       </ng-template>
     </kendo-grid-column>
 
-
-    <kendo-grid-column field="statusType" width="30">
-      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-        <input [(ngModel)]="dataItem.statusType" name="statusType" class="k-check-box" />
-      </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-command-column title="command" width="200">
+    <kendo-grid-command-column title="" width="200">
       <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
 
-        <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command" (click)="detailDialog.openDialogById(dataItem.specialStatusId)">Edit</button>
+        <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command">Edit</button>
         <button kendoGridRemoveCommand type="button">Remove</button>
         <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
         <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { GridDataResult } from '@progress/kendo-angular-grid';
@@ -11,14 +11,15 @@ import { CityModel } from '../model/city.model';
 import { BaseService } from './base.service';
 import { BaseKendoGridService } from './base-kendo-grid.service';
 import { OperationResultModel } from '../model/operation-result.model';
+import { UrlHelper } from '../infrastructure/url-helper';
 
 
 @Injectable()
 export class CityService extends BaseService {
 
   constructor(http: Http) {
-    super(http, 'city');
-   }
+    super(http, UrlHelper.CITY_API);
+  }
 
 
 
@@ -32,11 +33,37 @@ export class CityKendoGridService extends BaseKendoGridService {
   _cityService: CityService;
 
   constructor(http: Http, cityService: CityService) {
-    super(http, 'city');
-    this._cityService =  cityService;
-   }
+    super(http, UrlHelper.CITY_API);
+    this._cityService = cityService;
+  }
 
 
 
 }
 
+
+
+@Injectable()
+export class CityComboService extends BehaviorSubject<CityModel[]> {
+
+  _baseService: BaseService;
+  constructor(http: Http) {
+    super(null);
+    this._baseService = new BaseService(http, UrlHelper.CITY_API + '/');
+  }
+
+  public read(provinceId: number): void {
+    this._baseService.get('getItems/' + provinceId)
+      .subscribe(x => super.next(x));
+
+  }
+
+
+
+  public readAll(): void {
+    this._baseService.get('getAllItems')
+      .subscribe(x => super.next(x));
+
+  }
+
+}

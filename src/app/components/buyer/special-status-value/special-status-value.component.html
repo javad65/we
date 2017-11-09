@@ -1,45 +1,14 @@
-<form class="k-form k-rtl" 
-#detailValueForm="ngForm" 
-(ngSubmit)="onSaveDetail(detailValueForm.form)" 
-style="text-align:right;">
-
-<p>
-  <span>گروه وضعیت خاص : </span>
-   <b> {{model.specialStatusName}} </b>
-</p>
-
-  <label class="k-form-field">
-    <span>نام وضعیت خاص</span>
-    <input class="k-textbox" name="name" 
-    [(ngModel)]="model.name" 
-    placeholder="نام وضعیت خاص" required />
-  </label>
-  <!-- [(ngModel)]="model.name"  -->
-
-  <label class="k-form-field">
-    <input type="checkbox" id="haveMoreDetial" 
-    class="k-checkbox"
-    [(ngModel)]="model.haveMoreDetial" >
-    <label class="k-checkbox-label" for="haveMoreDetial">
-      سایر مقادیر</label>
-  </label>
-  <!-- [(ngModel)]="model.statusType"  -->
 
 
-  <label class="k-form-field">
-      <span> عنوان سایر مقادیر</span>
-      <input class="k-textbox" name="moreSpecialStatusLable" 
-     placeholder="عنوان سایر مقادیر" 
-     [(ngModel)]="model.moreSpecialStatusLable"  />
-    </label>
-    <!-- [(ngModel)]="model.moreSpecialStatusLable"  -->
-
-  <div>
-    <button class="k-button k-primary"
-    [disabled]="!(model.specialStatusId >0)"
-    (click)="onSaveDetail(detailValueForm.form)" type="button">ذخیره</button>
-  </div>
-
-
-</form>
-
+<div>
+<app-special-status-value-upsert #valueUpsert
+[dataItem]="dataItemValue" 
+[(ngModel)]="dataItemValue"
+>
+</app-special-status-value-upsert>
+</div>
+<div>
+<app-special-status-value-grid #valueGrid
+[dataItem]="dataItemValue" > 
+</app-special-status-value-grid>
+</div>ّ

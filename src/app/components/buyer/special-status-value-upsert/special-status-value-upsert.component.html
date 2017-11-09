@@ -1,42 +1,59 @@
-<form class="k-form k-rtl" 
+<form class="k-form-inline" 
 #detailValueForm="ngForm" 
 (ngSubmit)="onSaveDetail(detailValueForm.form)" 
 style="text-align:right;">
 
-<p>
+<p class="alert alert-info">
   <span>گروه وضعیت خاص : </span>
-   <b> {{model.specialStatusName}} </b>
+   <b> {{dataItem.specialStatusName}} </b>
 </p>
 
   <label class="k-form-field">
     <span>نام وضعیت خاص</span>
-    <input class="k-textbox" name="name" 
-    [(ngModel)]="model.name" 
+    <input class="k-textbox"
+     name="name"
+    [(ngModel)]="dataItem.name" 
     placeholder="نام وضعیت خاص" required />
   </label>
-  <!-- [(ngModel)]="model.name"  -->
 
   <label class="k-form-field">
-    <input type="checkbox" id="haveMoreDetial" 
-    class="k-checkbox"
-    [(ngModel)]="model.haveMoreDetial" >
-    <label class="k-checkbox-label" for="haveMoreDetial">
-      سایر مقادیر</label>
+    <span>شرح وضعیت خاص</span>
+    <input class="k-textbox"
+     name="descreption"
+    [(ngModel)]="dataItem.descreption" 
+    placeholder="شرح وضعیت خاص" required />
   </label>
-  <!-- [(ngModel)]="model.statusType"  -->
 
 
-  <label class="k-form-field">
-      <span> عنوان سایر مقادیر</span>
-      <input class="k-textbox" name="moreSpecialStatusLable" 
-     placeholder="عنوان سایر مقادیر" 
-     [(ngModel)]="model.moreSpecialStatusLable"  />
-    </label>
-    <!-- [(ngModel)]="model.moreSpecialStatusLable"  -->
-
+<div class="row">
+  <div class="col-md-3">
+      <label class="k-form-field" style="margin-top: 10px;">
+          <input type="checkbox" id="haveMoreDetial" 
+          name="haveMoreDetial"
+          [(ngModel)]="dataItem.haveMoreDetial" 
+          class="k-checkbox">
+          <label class="k-checkbox-label" for="haveMoreDetial">
+            سایر مقادیر</label>
+        </label>
+        <!-- [(ngModel)]="dataItem.haveMoreDetial"  -->
+      
+  </div>
+  <div class="col-md-9">
+      <label class="k-form-field">
+          <span> عنوان سایر مقادیر</span>
+          <input class="k-textbox" 
+          name="moreSpecialStatusLable"
+          [(ngModel)]="dataItem.moreSpecialStatusLable" 
+         placeholder="عنوان سایر مقادیر"   />
+        </label>
+        <!-- [(ngModel)]="dataItem.moreSpecialStatusLable"  -->
+    
+  </div>
+</div>
+ <br>
   <div>
     <button class="k-button k-primary"
-    [disabled]="!(model.specialStatusId >0)"
+    [disabled]="!(dataItem.specialStatusId >0)"
     (click)="onSaveDetail(detailValueForm.form)" type="button">ذخیره</button>
   </div>
 

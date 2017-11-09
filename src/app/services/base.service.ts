@@ -113,14 +113,14 @@ export class BaseService {
     });
 
     const that = this;
-   // this.loading.show();
+    // this.loading.show();
     return this._http.post(httpUrl, body, options)
       //  .map(this.extractData)
       .map(res => {
         const b = res.json();
         // const r = body.fields || {};
         that.operationHandling(b);
-      //  that.loading.hide();
+        //  that.loading.hide();
       })
       .catch(this.handleError);
 
@@ -138,6 +138,28 @@ export class BaseService {
     //   .catch(this.handleError);
     // // }
 
+  }
+
+  public postJson(model: any, url?: string): Observable<OperationResultModel> {
+    const body = new URLSearchParams();
+    this.appendParams(body, model);
+    const httpUrl = `${this.API_URL}${url}`;
+    const headers = new Headers(
+      {
+        'Accept': 'application/json',
+        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+
+    const options = new RequestOptions({
+      headers: headers,
+      // params : body
+    });
+
+    const that = this;
+    return this._http.post(httpUrl, body, options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
   }
 
 
@@ -190,13 +212,13 @@ export class BaseService {
 
   public add(model: any): Observable<OperationResultModel> {
     // return this.post(model, 'Add');
-    return this.post(model, '');
+    return this.postJson(model, '');
   }
   public edit(model: any): Observable<OperationResultModel> {
-    return this.post(model, '/Edit' /*, 'Edit'*/);
+    return this.postJson(model, '/Edit' /*, 'Edit'*/);
   }
   public delete(id: number): Observable<OperationResultModel> {
-    return this.post(id, '/remove/' + id /* 'Delete/' + id*/);
+    return this.postJson(id, '/remove/' + id /* 'Delete/' + id*/);
   }
 
   public find(id: number): Observable<OperationResultModel> {
@@ -210,7 +232,7 @@ export class BaseService {
       });
 
 
-   }
+  }
 
 
 
@@ -225,7 +247,7 @@ export class BaseService {
   protected handleError(error: Response): Observable<any> {
 
     console.error('observable error: ', error);
- //   this.loading.hide();
+    //   this.loading.hide();
     return Observable.throw(error.statusText);
   }
 
@@ -243,21 +265,22 @@ export class BaseService {
   }
 
 
-  public operationHandling(operation: OperationResultModel, successFunc?: any, errorFunc?: any): void {
+  public operationHandling(operation: OperationResultModel,
+    successFunc?: any, errorFunc?: any): void {
+    this.loading.hide();
+    if (operation.error === true) {
 
-    if (operation.error) {
-      this.notify.showError(operation.errorMessage);
-      this.loading.hide();
-      // alert(operation.errorMessage);
       if (errorFunc) {
         errorFunc();
+      } else {
+        this.notify.showError(operation.errorMessage);
       }
-    }
-
-    if (successFunc) {
-      this.notify.showError();
-      this.loading.hide();
-      successFunc(operation.result);
+    } else {
+      if (5) {
+        successFunc(operation.result);
+      } else {
+        this.notify.showSuccess();
+      }
     }
 
   }

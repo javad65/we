@@ -46,5 +46,28 @@ export class ProvinceComboService extends BehaviorSubject<ProvinceModel[]> {
               .subscribe(x => super.next(x));
 
    }
+   public readAll(): void {
+      this._baseService.get('getAllItems' )
+              .subscribe(x => super.next(x));
+
+   }
 
 }
+
+
+// @Injectable()
+// export class ProvinceComboSingleService extends BehaviorSubject<ProvinceModel[]> {
+
+//  _baseService: BaseService;
+//     constructor(http: Http ) {
+//     super(null);
+//     this._baseService = new BaseService(http, UrlHelper.PROVINCE_API + '/');
+//    }
+
+//    public read(): void {
+//       this._baseService.get('getAllItems' )
+//               .subscribe(x => super.next(x));
+
+//    }
+
+// }

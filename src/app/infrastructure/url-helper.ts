@@ -5,4 +5,5 @@ export class UrlHelper {
     static CITY_API= 'city';
     static SpecialStatus_API= 'specialstatus';
     static SpecialStatusValue_API= 'specialstatusvalue';
+    static PERSON_API= 'person';
 }

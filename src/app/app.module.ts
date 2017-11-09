@@ -57,16 +57,17 @@ import { ScaleComponent } from './components/base/scale/scale.component';
 
 import { BaseService } from './services/base.service';
 import { BaseKendoGridService } from './services/base-kendo-grid.service';
-import { CountryService } from './services/country.service';
-import { CountryComboService } from './services/country-combo.service';
+import { CountryService, CountryComboService } from './services/country.service';
 import { ProvinceService } from './services/province.service';
 import { CityService, CityKendoGridService } from './services/city.service';
 import { ProvinceComboComponent } from './components/shared/province-combo/province-combo.component';
+import { ProvinceComboSingleComponent } from './components/shared/province-combo-single/province-combo-single.component';
+import { CityComboSingleComponent } from './components/shared/city-combo-single/city-combo-single.component';
 
 
 import { SpecialStatusComponent } from './components/buyer/special-status/special-status.component';
 import { SpecialStatusValueComponent } from './components/buyer/special-status-value/special-status-value.component';
-import { SpecialStatusUpsertomponent } from './components/buyer/special-status-value-upsert/special-status-value-upsert.component';
+import { SpecialStatusValueUpsertComponent } from './components/buyer/special-status-value-upsert/special-status-value-upsert.component';
 import { SpecialStatusValueGridComponent } from './components/buyer/special-status-value-grid/special-status-value-grid.component';
 import { PersonComponent } from './components/buyer/person/person.component';
 import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
@@ -88,9 +89,12 @@ import { PersonSpecialStatusComponent } from './components/buyer/person-special-
     ScaleComponent,
     CityDetailComponent,
     ProvinceComboComponent,
+    ProvinceComboSingleComponent,
+    CityComboSingleComponent,
 
     SpecialStatusComponent,
     SpecialStatusValueComponent,
+    SpecialStatusValueUpsertComponent,
     SpecialStatusValueGridComponent,
     PersonComponent,
     PersonDetailComponent,
@@ -122,8 +126,8 @@ import { PersonSpecialStatusComponent } from './components/buyer/person-special-
     AppRoutingModule
   ],
   providers: [
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-   // { provide: LOCALE_ID, useValue: 'fa' },
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    // { provide: LOCALE_ID, useValue: 'fa' },
     SnotifyService,
 
     BaseService,
@@ -142,10 +146,10 @@ import { PersonSpecialStatusComponent } from './components/buyer/person-special-
 export class AppModule {
   static injector: Injector;
 
-  constructor (injector: Injector) {
+  constructor(injector: Injector) {
     AppModule.injector = injector;
   }
- }
+}
 
 
 

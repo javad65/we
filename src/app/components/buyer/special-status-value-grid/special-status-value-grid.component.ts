@@ -24,9 +24,9 @@ import { OperationResultModel } from '../../../model/operation-result.model';
 })
 export class SpecialStatusValueGridComponent extends BaseKendoGridComponent {
   _service: SpecialStatusValueKendoGridService;
-  @Input() specialStatusId?: number;
 
-  model = <SpecialStatusValueModel>{};
+  @Input() dataItem = <SpecialStatusValueModel>{};
+  // model = <SpecialStatusValueModel>{};
   public opened = false;
   constructor(service: SpecialStatusValueKendoGridService) {
     super(service);
@@ -45,18 +45,19 @@ export class SpecialStatusValueGridComponent extends BaseKendoGridComponent {
 
 
   public setStatusItem(e: SelectionEvent) {
-    this.model.specialStatusId = 0;
-    this.model.descreption = '';
-    this.model.haveMoreDetial = false;
-    this.model.moreSpecialStatusLable = '';
-    this.model.name = '';
-    this.model.specialStatusValueId = 0;
+
+    this.dataItem.specialStatusId = 0;
+    this.dataItem.descreption = '';
+    this.dataItem.haveMoreDetial = false;
+    this.dataItem.moreSpecialStatusLable = '';
+    this.dataItem.name = '';
+    this.dataItem.specialStatusValueId = 0;
 
 
     if (e.selectedRows.length > 0) {
       const m = <SpecialStatusModel>e.selectedRows[0].dataItem;
-      this.model.specialStatusId = m.specialStatusId;
-      this.model.specialStatusName = m.name;
+      this.dataItem.specialStatusId = m.specialStatusId;
+      this.dataItem.specialStatusName = m.name;
       this._service.readId = m.specialStatusId;
       this.refresh();
     }
@@ -64,7 +65,7 @@ export class SpecialStatusValueGridComponent extends BaseKendoGridComponent {
 
 
   private refresh(): void {
-    this.model.descreption = '';
+    this.dataItem.descreption = '';
     // this.model.haveMoreDetial = false;
     // this.model.moreSpecialStatusLable = '';
     // this.model.specialStatusValueId = 0;
@@ -81,7 +82,7 @@ export class SpecialStatusValueGridComponent extends BaseKendoGridComponent {
 
   public onSaveDetail(form) {
 
-    this._service.save(this.model, this.model.specialStatusValueId < 1);
+    this._service.save(this.dataItem, this.dataItem.specialStatusValueId < 1);
 
   }
 

@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Rx';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { CountryModel } from '../../../model/country.model';
-import { CountryComboService } from '../../../services/country-combo.service';
-import { BaseComponent } from '../base.component';
+import { CountryComboService } from '../../../services/country.service';
+import { BaseComponent, BaseControlValueAccessor } from '../base.component';
 
 @Component({
   selector: 'app-country-combo',
@@ -20,7 +20,7 @@ import { BaseComponent } from '../base.component';
   ]
   // inputs: ['defaultValue']
 })
-export class CountryComboComponent implements ControlValueAccessor {
+export class CountryComboComponent extends BaseControlValueAccessor {
   // extends BaseComponent {
 
   _service: CountryComboService;
@@ -33,7 +33,8 @@ export class CountryComboComponent implements ControlValueAccessor {
 
   private view: Observable<CountryModel[]>;
   constructor(service: CountryComboService) {
-    //  super();
+    super();
+
     this._service = service;
     this.view = service;
     this._service.read();
@@ -84,13 +85,6 @@ export class CountryComboComponent implements ControlValueAccessor {
       this.selectedCountryId = obj;
     }
   }
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-  }
-  setDisabledState?(isDisabled: boolean): void {
-  }
-  propagateChange = (_: any) => { };
+
 
 }
