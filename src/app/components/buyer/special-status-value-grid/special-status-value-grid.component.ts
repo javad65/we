@@ -17,12 +17,12 @@ import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
 import { OperationResultModel } from '../../../model/operation-result.model';
 
 @Component({
-  selector: 'app-special-status-detail',
-  templateUrl: './special-status-detail.component.html',
-  styleUrls: ['./special-status-detail.component.scss'],
+  selector: 'app-special-status-value-grid',
+  templateUrl: './special-status-value-grid.component.html',
+  styleUrls: ['./special-status-value-grid.component.scss'],
   providers: [SpecialStatusValueKendoGridService]
 })
-export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
+export class SpecialStatusValueGridComponent extends BaseKendoGridComponent {
   _service: SpecialStatusValueKendoGridService;
   @Input() specialStatusId?: number;
 
@@ -31,26 +31,20 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
   constructor(service: SpecialStatusValueKendoGridService) {
     super(service);
     this._service = service;
+
+    this.state.filter = {
+      logic: 'and',
+      filters: [
+        { field: 'name', operator: 'contains', value: '' }
+      ]
+    };
   }
 
   ngOnInitHandler() {
   }
 
 
-  public setStatusId(id: number) {
-    this.model.specialStatusId = id;
-    this.refresh();
-    console.log(id);
-  }
-
-  // public setStatusItem(item: SpecialStatusModel) {
-  //   debugger;
-  //   this.model.specialStatusId = item.specialStatusId;
-  //   this.refresh();
-  // }
-
   public setStatusItem(e: SelectionEvent) {
-
     this.model.specialStatusId = 0;
     this.model.descreption = '';
     this.model.haveMoreDetial = false;
@@ -58,10 +52,12 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
     this.model.name = '';
     this.model.specialStatusValueId = 0;
 
+
     if (e.selectedRows.length > 0) {
       const m = <SpecialStatusModel>e.selectedRows[0].dataItem;
       this.model.specialStatusId = m.specialStatusId;
       this.model.specialStatusName = m.name;
+      this._service.readId = m.specialStatusId;
       this.refresh();
     }
   }
@@ -82,56 +78,15 @@ export class SpecialStatusDetailComponent extends BaseKendoGridComponent {
     this.refresh();
   }
 
-  public onSubmit(form) {
 
+  public onSaveDetail(form) {
+
+    this._service.save(this.model, this.model.specialStatusValueId < 1);
 
   }
 
 
 
-
-  // public openDialog() {
-  //   this.opened = true;
-  // }
-  // public openDialogById(id: number) {
-  //   this.model.specialStatusId = id;
-  //   const that = this;
-  //   that._service.loading.show();
-  //   this._service.find(id)
-  //     .subscribe(res => {
-  //       that._service.operationHandling(res, function (r) {
-  //         that.model = r;
-  //         that._service.loading.hide();
-  //         that.opened = true;
-  //       });
-  //     });
-  // }
-
-
-  // public onClose() {
-  //   this.opened = false;
-  // }
-
-  // public onOk() {
-  //   if (this.model.specialStatusId > 0) {
-  //     this._service.edit(this.model).subscribe(
-  //       d => this.opened = false,
-  //       err => console.log('error: ', err)
-  //     );
-  //   } else {
-  //     this._service.add(this.model).subscribe(
-  //       d => this.opened = false,
-  //       err => console.log('error: ', err)
-  //     );
-  //   }
-  //   // alert('Data deleted.');
-  // }
-
-
-
-  // public onProvinceChange(value: any) {
-  //   //  this.model.provinceId = <number>value;
-  // }
 
 
 }

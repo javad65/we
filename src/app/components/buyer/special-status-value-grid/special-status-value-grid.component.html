@@ -1,0 +1,68 @@
+
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
+
+  <kendo-grid 
+  [data]="gridDataResult | async"
+   [pageSize]="state.take" 
+   [skip]="state.skip" 
+   [sort]="state.sort" 
+   [sortable]="true"
+   [filter]="state.filter"
+    filterable="menu"
+   [pageable]="{
+    buttonCount: buttonCount,
+    info: info,
+    type: type,
+    pageSizes: pageSizes,
+    previousNext: previousNext
+  }"
+   
+    [selectable]="true" 
+    [scrollable]="'none'" 
+    (dataStateChange)="dataStateChange($event)" 
+    (edit)="editHandler($event)"
+    (cancel)="cancelHandler($event)" 
+    (save)="saveHandler($event)" 
+    (remove)="removeHandler($event)" 
+    (add)="addHandler($event)">
+    <!-- [pageable]="true"  -->
+    <!-- <ng-template kendoGridToolbarTemplate>
+      <button class="k-button " (click)="detailDialog.openDialog()" type="button">Add new</button>
+    </ng-template> -->
+    <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+
+
+    <kendo-grid-column field="name" width="200">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="canMoreSelect" width="30">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input [(ngModel)]="dataItem.canMoreSelect" name="canMoreSelect" class="k-textbox" required/>
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column field="statusType" width="30">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input [(ngModel)]="dataItem.statusType" name="statusType" class="k-check-box" />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-command-column title="command" width="200">
+      <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
+
+        <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command" (click)="detailDialog.openDialogById(dataItem.specialStatusId)">Edit</button>
+        <button kendoGridRemoveCommand type="button">Remove</button>
+        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+        <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+      </ng-template>
+    </kendo-grid-command-column>
+
+  </kendo-grid>
+
+</form>
+
+

@@ -2,8 +2,8 @@
   <div class="col-md-6 section-col">
 
 
-    <section class="section-item">
-
+    <fieldset class="section-item">
+      <legend>گروه وضعیت خاص</legend>
       <form class="k-form k-rtl" #detailStatusForm="ngForm" (ngSubmit)="statusSubmit(detailStatusForm.form)" style="text-align:right;">
         <label class="k-form-field">
           <span>نام شهر</span>
@@ -33,24 +33,12 @@
 
       <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
 
-        <kendo-grid [data]="gridDataResult | async" 
-        [pageSize]="state.take" 
-        [skip]="state.skip" 
-        [sort]="state.sort" 
-        [sortable]="true"
-          [pageable]="true" 
-          [selectable]="true" 
-          [scrollable]="'none'" 
-          (dataStateChange)="dataStateChange($event)" 
-         (selectionChange) ="statusDetail.setStatusItem($event)"
-         
-          (edit)="editHandler($event)"
-          (cancel)="cancelHandler($event)" 
-          (save)="saveHandler($event)" 
-          (remove)="removeHandler($event)"
-           (add)="addHandler($event)">
+        <kendo-grid [data]="gridDataResult | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="true"
+          [pageable]="true" [selectable]="true" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (selectionChange)="statusDetail.setStatusItem($event)"
+          (edit)="editHandler($event)" (cancel)="cancelHandler($event)" (save)="saveHandler($event)" (remove)="removeHandler($event)"
+          (add)="addHandler($event)">
 
-           <!--
+          <!--
               (selectionChange) ="onSelectionChange($event)"
               [rowSelected]="isRowSelected" 
             [selectedKeys]="mySelection"
@@ -68,14 +56,12 @@
               </ng-template>
           </kendo-grid-checkbox-column>
          -->
-          <kendo-grid-column field="specialStatusId"
-           width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+          <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
 
 
           <kendo-grid-column field="name" width="200" [filterable]="true">
             <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-              <input [(ngModel)]="dataItem.name" name="name" 
-              class="k-textbox" required/>
+              <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
             </ng-template>
           </kendo-grid-column>
 
@@ -107,15 +93,15 @@
       </form>
 
 
-    </section>
+    </fieldset>
   </div>
   <div class="col-md-6  section-col">
 
-    <section class="section-item">
-
+    <fieldset class="section-item">
+      <legend>وضعیت خاص</legend>
       <app-special-status-detail #statusDetail>
       </app-special-status-detail>
-    </section>
+    </fieldset>
 
   </div>
 </div>

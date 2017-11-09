@@ -16,8 +16,10 @@ import { UrlHelper } from '../infrastructure/url-helper';
 export class SpecialStatusValueService  extends BaseService {
 
   constructor(http: Http) {
-    super(http, UrlHelper.SpecialStatus_API);
+    super(http, UrlHelper.SpecialStatusValue_API);
    }
+
+
 
 }
 
@@ -27,7 +29,7 @@ export class SpecialStatusValueService  extends BaseService {
 export class SpecialStatusValueKendoGridService  extends BaseKendoGridService {
 
   constructor(http: Http) {
-    super(http,  UrlHelper.SpecialStatus_API);
+    super(http,  UrlHelper.SpecialStatusValue_API);
    }
 
 

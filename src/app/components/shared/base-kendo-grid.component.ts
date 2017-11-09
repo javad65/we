@@ -1,20 +1,30 @@
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import { State } from '@progress/kendo-data-query';
+import { process, State } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 
-import {NotifyManager } from '../../infrastructure/notify-manager';
+import { NotifyManager } from '../../infrastructure/notify-manager';
 
 import { BaseKendoGridService } from '../../services/base-kendo-grid.service';
 
 export abstract class BaseKendoGridComponent implements OnInit {
-  protected  notify: NotifyManager;
+    protected notify: NotifyManager;
 
     protected gridDataResult: Observable<GridDataResult>;
+
+    private buttonCount = 5;
+    private info = true;
+    private type: 'numeric' | 'input' = 'numeric';
+    private pageSizes = true;
+    private previousNext = true;
     protected state: State = {
         skip: 0,
         take: 10,
+        filter: {
+            logic: 'and',
+            filters: []
+        }
     };
     protected editedRowIndex: number;
     protected editedItem: any;
@@ -22,14 +32,18 @@ export abstract class BaseKendoGridComponent implements OnInit {
 
     constructor(service: BaseKendoGridService) {
         this._service = service;
-        this.gridDataResult = service;
-       this.notify = NotifyManager.createInstance();
+        this.gridDataResult =
+            this.gridDataResult = service;
+        // this.gridDataResult = process(s;
+        this.notify = NotifyManager.createInstance();
+
+
     }
 
     abstract ngOnInitHandler();
-     ngOnInit() {
-         this.ngOnInitHandler();
-     }
+    ngOnInit() {
+        this.ngOnInitHandler();
+    }
 
     protected addHandler({ sender }) {
         this.closeEditor(sender);

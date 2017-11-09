@@ -6,7 +6,7 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { toODataString, toDataSourceRequestString } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { State } from '@progress/kendo-data-query';
+import { process, State } from '@progress/kendo-data-query';
 
 import { BaseService } from './base.service';
 import { NotifyManager } from '../infrastructure/notify-manager';
@@ -14,6 +14,7 @@ import { LoadingManager } from '../infrastructure/loading-manager';
 
 @Injectable()
 export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
+  readId: number;
   loading: LoadingManager;
   notify: NotifyManager;
   protected _baseService: BaseService;
@@ -22,7 +23,7 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   protected dataItems: any[] = [];
   public state: State = {
     skip: 0,
-    take: 10,
+    take: 10
   };
 
   protected CREATE_ACTION = 'create';
@@ -30,12 +31,14 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
   protected REMOVE_ACTION = 'destroy';
 
 
-  constructor(http: Http, apiUrl: string) {
+  constructor(http: Http, apiUrl: string, readId: number = 0) {
     super(null);
     this._http = http;
+    this.readId = readId;
     this._baseService = new BaseService(http, apiUrl);
     this.notify = this._baseService.notify;
     this.loading = this._baseService.loading;
+
 
   }
 
@@ -108,7 +111,13 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
     const queryStr = `${toDataSourceRequestString(state)}`;
     //  url = url || 'read';
     // var httpUrl=`${this._baseService.API_URL}${url}?${queryStr}`;
-    const httpUrl = `${this._baseService.API_URL}?${queryStr}`;
+
+    let httpUrl = `${this._baseService.API_URL}`;
+    if (this.readId > 0) {
+      httpUrl += `?id=${this.readId}&${queryStr}`;
+    } else {
+      httpUrl += `?${queryStr}`;
+    }
     return this._http
       .get(httpUrl)
       .share()
