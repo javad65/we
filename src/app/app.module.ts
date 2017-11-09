@@ -65,7 +65,9 @@ import { ProvinceComboComponent } from './components/shared/province-combo/provi
 
 
 import { SpecialStatusComponent } from './components/buyer/special-status/special-status.component';
-import { SpecialStatusDetailComponent } from './components/buyer/special-status-detail/special-status-detail.component';
+import { SpecialStatusValueComponent } from './components/buyer/special-status-value/special-status-value.component';
+import { SpecialStatusUpsertomponent } from './components/buyer/special-status-value-upsert/special-status-value-upsert.component';
+import { SpecialStatusValueGridComponent } from './components/buyer/special-status-value-grid/special-status-value-grid.component';
 import { PersonComponent } from './components/buyer/person/person.component';
 import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
 import { PersonSpecialStatusComponent } from './components/buyer/person-special-status/person-special-status.component';
@@ -88,7 +90,8 @@ import { PersonSpecialStatusComponent } from './components/buyer/person-special-
     ProvinceComboComponent,
 
     SpecialStatusComponent,
-    SpecialStatusDetailComponent,
+    SpecialStatusValueComponent,
+    SpecialStatusValueGridComponent,
     PersonComponent,
     PersonDetailComponent,
     PersonSpecialStatusComponent
