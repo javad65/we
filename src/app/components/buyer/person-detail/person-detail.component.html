@@ -35,14 +35,18 @@
             <div class="row  au margin-top-10">
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>نام</span>
+                  <span>نام
+                      <span class="k-required">*</span>
+                  </span>
                   <input class="k-textbox"  required
                   name="firstName" [(ngModel)]="model.firstName" placeholder="نام" />
                 </label>
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>نام خانوادگی</span>
+                  <span>نام خانوادگی
+                      <span class="k-required">*</span>
+                  </span>
                   <input class="k-textbox"
                   required
                   name="lastName" 
@@ -61,7 +65,9 @@
                 </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>نام پدر</span>
+                  <span>نام پدر
+                      <span class="k-required">*</span>
+                  </span>
                   <input class="k-textbox"
                   required
                    name="fatherName" [(ngModel)]="model.fatherName" placeholder="نام پدر" />
@@ -73,7 +79,9 @@
               
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>شماره شناسنامه</span>
+                  <span>شماره شناسنامه
+                      <span class="k-required">*</span>
+                  </span>
                   <input class="k-textbox"
                    name="birthCertificateId" 
                    [(ngModel)]="model.birthCertificateId"
@@ -92,7 +100,9 @@
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>موبایل</span>
+                  <span>موبایل
+                      <span class="k-required">*</span>
+                  </span>
                   <input class="k-textbox" 
                   required
                   name="mobile"
@@ -101,7 +111,9 @@
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>تاریخ تولد</span>
+                  <span>تاریخ تولد
+                      <span class="k-required">*</span>
+                  </span>
                   <kendo-datepicker [value]="birthDate" name="birthDate" [(ngModel)]="model.birthDate" style="width:100%;"></kendo-datepicker>
                 </label>
               </div>
@@ -111,7 +123,9 @@
             <div class="row  au margin-top-10">
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>تابعیت</span>
+                  <span>تابعیت
+                      <span class="k-required">*</span>
+                  </span>
                   <app-country-combo 
                   name ="citizenCountryId"
                   [(ngModel)]="model.citizenCountryId"
@@ -120,7 +134,9 @@
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>ملیت</span>
+                  <span>ملیت
+                      <span class="k-required">*</span>
+                  </span>
                   <app-country-combo
                   name ="nationalityCountryId"
                   [(ngModel)]="model.nationalityCountryId"
@@ -130,7 +146,9 @@
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>محل تولد</span>
+                  <span>محل تولد
+                      <span class="k-required">*</span>
+                  </span>
                   <app-province-combo-single
                   name ="birthProvinceId"
                   [(ngModel)]="model.birthProvinceId"
@@ -139,7 +157,9 @@
               </div>
               <div class="col-md-3">
                 <label class="k-form-field">
-                  <span>محل صدور شناسنامه</span>
+                  <span>محل صدور شناسنامه
+                      <span class="k-required">*</span>
+                  </span>
                   <app-city-combo-single
                   name ="birthCertificateCityId"
                   [(ngModel)]="model.birthCertificateCityId"                  
@@ -159,7 +179,9 @@
                 <legend>منزل</legend>
                 <div class="row1">
                   <label class="k-form-field">
-                    <span>منطقه</span>
+                    <span>منطقه
+                        <span class="k-required">*</span>
+                    </span>
                     <input class="k-textbox" 
                     required
                     name="urbanAreaHome"
@@ -167,7 +189,9 @@
                   </label>
 
                   <label class="k-form-field">
-                    <span>تلفن</span>
+                    <span>تلفن
+                        <span class="k-required">*</span>
+                    </span>
                     <input class="k-textbox"
                      name="homePhone"
                       [(ngModel)]="model.homePhone"
@@ -176,7 +200,9 @@
                   </label>
 
                   <label class="k-form-field">
-                    <span>آدرس</span>
+                    <span>آدرس
+                        <span class="k-required">*</span>
+                    </span>
                     <textarea class="k-textbox"
                      name="homeAddress" 
                      [(ngModel)]="model.homeAddress" 

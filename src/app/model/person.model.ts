@@ -41,3 +41,16 @@ export interface PersonModel {
 
 
 }
+
+
+
+export interface PersonStatusModel {
+    personId: number;
+    personFirstName: string;
+    personLastName: string;
+    personAliasName: string;
+    statusId: number;
+    statusValueId: number;
+    moreStatusValueId: string;
+
+}

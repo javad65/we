@@ -1,3 +1,81 @@
-<p>
-  person-special-status works!
+
+
+<p class="alert alert-info">
+  {{model.personFirstName}} {{model.personLastName}}
 </p>
+
+
+
+
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
+
+  <kendo-grid 
+  [data]="gridDataResult | async"
+   [pageSize]="state.take" 
+   [skip]="state.skip" 
+   [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="true" 
+    [selectable]="true" 
+    [scrollable]="'none'" 
+    (dataStateChange)="dataStateChange($event)" 
+    (selectionChange)="valueDetail.setStatusItem($event)"
+    (edit)="editHandler($event)" 
+    (cancel)="cancelHandler($event)" 
+    (save)="saveHandler($event)" 
+    (remove)="removeHandler($event)"
+    (add)="addHandler($event)">
+
+    <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+
+
+    <kendo-grid-column field="name" title="نام گروه" width="200" [filterable]="true">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="canMoreSelect" title="امکان انتخاب بیشتر" width="30">
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+        <p *ngIf="dataItem.canMoreSelect" class="text-center">
+          <span class="fa fa-check text-success"></span>
+        </p>
+        <p *ngIf="!dataItem.canMoreSelect" class="text-center">
+          <span class="fa fa-close  text-danger"></span>
+        </p>
+
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column field="statusType" title="نوع وضعیت خاص " width="30">
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+        <!-- <input [(ngModel)]="dataItem.statusType" 
+                  name="statusType"
+                   class="k-check-box" disabled/> -->
+
+        <p *ngIf="dataItem.statusType === true " class="text-center">
+          <span>اشخاص حقیقی</span>
+        </p>
+        <p *ngIf="dataItem.statusType === false " class="text-center">
+          <span>اشخاص حقوقی</span>
+        </p>
+        <p *ngIf="dataItem.statusType===null" class="text-center">
+          <span>کلیه اشخاص</span>
+        </p>
+
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-command-column title="" width="200">
+      <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
+        <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command">Edit</button>
+        <button kendoGridRemoveCommand type="button">Remove</button>
+        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+        <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+      </ng-template>
+    </kendo-grid-command-column>
+
+  </kendo-grid>
+
+</form>

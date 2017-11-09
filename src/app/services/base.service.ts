@@ -221,14 +221,31 @@ export class BaseService {
     return this.postJson(id, '/remove/' + id /* 'Delete/' + id*/);
   }
 
-  public find(id: number): Observable<OperationResultModel> {
+  // public find(id: number): Observable<OperationResultModel> {
+  //   const that = this;
+  //   const httpUrl = `${this.API_URL}/find/${id}`;
+  //   return this._http
+  //     .get(httpUrl)
+  //     .map(res => {
+  //       const b = res.json();
+  //       return b;
+  //     });
+
+
+  // }
+
+  public find(id: number): Observable<any> {
     const that = this;
     const httpUrl = `${this.API_URL}/find/${id}`;
     return this._http
       .get(httpUrl)
       .map(res => {
         const b = res.json();
-        return b;
+        debugger;
+        that.operationHandling(b, (c) => {
+          return c;
+        });
+        // return b;
       });
 
 

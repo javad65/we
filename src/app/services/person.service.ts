@@ -30,11 +30,11 @@ export class PersonService extends BaseService {
 
 @Injectable()
 export class PersonKendoGridService extends BaseKendoGridService {
-  _Service: PersonService;
+  _personService: PersonService;
 
-  constructor(http: Http, cityService: PersonService) {
-    super(http, UrlHelper.PERSON_API);
-    this._Service = cityService;
+  constructor(http: Http, service: PersonService) {
+    super(http, UrlHelper.PERSONSTATUS_API);
+    this._personService = service;
   }
 
 
