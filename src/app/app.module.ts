@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // third party
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DpDatePickerModule} from 'ng2-jalali-date-picker';
 
 // Kendo
 import { RTL } from '@progress/kendo-angular-l10n';
@@ -39,6 +41,10 @@ import { AppRoutingModule } from './app-routing.module';
 // import { UnitModule } from './components/unit/unit.module';
 // import { BuyerModule } from './components/buyer/buyer.module';
 // import { WbsModule } from './components/wbs/wbs.module';
+
+
+// pipes
+import { JalaliPipe } from './pipes/jalali.pipe';
 
 
 // Components
@@ -72,9 +78,15 @@ import { SpecialStatusValueGridComponent } from './components/buyer/special-stat
 import { PersonComponent } from './components/buyer/person/person.component';
 import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
 import { PersonSpecialStatusComponent } from './components/buyer/person-special-status/person-special-status.component';
+import { CompanyTypeComboComponent } from './components/buyer/company-type/company-type-combo.component';
+import { CompanyComponent } from './components/buyer/company/company.component';
+import { CompanyDetailComponent } from './components/buyer/company-detail/company-detail.component';
+import { CompanySpecialStatusComponent } from './components/buyer/company-special-status/company-special-status.component';
 
 @NgModule({
   declarations: [
+    JalaliPipe,
+
     // CountryComboComponent,
     AppComponent,
 
@@ -98,16 +110,22 @@ import { PersonSpecialStatusComponent } from './components/buyer/person-special-
     SpecialStatusValueGridComponent,
     PersonComponent,
     PersonDetailComponent,
-    PersonSpecialStatusComponent
+    PersonSpecialStatusComponent,
+    CompanyTypeComboComponent,
+    CompanyComponent,
+    CompanyDetailComponent,
+    CompanySpecialStatusComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
 
+    NgbModule.forRoot(),
     SnotifyModule,
     Ng4LoadingSpinnerModule,
-
+    DpDatePickerModule,
+    
     // Register the kendo modules
     BrowserAnimationsModule,
     ButtonsModule,

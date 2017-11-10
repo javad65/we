@@ -45,12 +45,15 @@ export interface PersonModel {
 
 
 export interface PersonStatusModel {
+    personStatusId: number;
     personId: number;
     personFirstName: string;
     personLastName: string;
     personAliasName: string;
     statusId: number;
+    statusName: number;
     statusValueId: number;
-    moreStatusValueId: string;
+    statusValueName: number;
+    moreStatusValue: string;
 
 }

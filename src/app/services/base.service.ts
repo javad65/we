@@ -241,11 +241,11 @@ export class BaseService {
       .get(httpUrl)
       .map(res => {
         const b = res.json();
-        debugger;
-        that.operationHandling(b, (c) => {
-          return c;
-        });
-        // return b;
+        // debugger;
+        // that.operationHandling(b, (c) => {
+        //   return c;
+        // });
+         return b;
       });
 
 

@@ -7,4 +7,7 @@ export class UrlHelper {
     static SpecialStatusValue_API= 'specialstatusvalue';
     static PERSON_API= 'person';
     static PERSONSTATUS_API= 'personstatus';
+    static COMPANY_API= 'company';
+    static COMPANYSTATUS_API= 'companystatus';
+    static COMPANYTYPE_API= 'companytype';
 }

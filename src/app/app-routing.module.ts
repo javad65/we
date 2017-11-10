@@ -16,6 +16,9 @@ import { SpecialStatusComponent } from './components/buyer/special-status/specia
 import { PersonComponent } from './components/buyer/person/person.component';
 import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
 import { PersonSpecialStatusComponent } from './components/buyer/person-special-status/person-special-status.component';
+import { CompanyComponent } from './components/buyer/company/company.component';
+import { CompanyDetailComponent } from './components/buyer/company-detail/company-detail.component';
+import { CompanySpecialStatusComponent } from './components/buyer/company-special-status/company-special-status.component';
 
 const routes: Routes = [
 //   { path: 'home', component: WelcomeComponent },
@@ -34,6 +37,10 @@ const routes: Routes = [
 { path: 'person/detail', component: PersonDetailComponent },
 { path: 'person/detail/:id', component: PersonDetailComponent },
 { path: 'person/detail/:id/special', component: PersonSpecialStatusComponent },
+{ path: 'company', component: CompanyComponent },
+{ path: 'company/detail', component: CompanyDetailComponent },
+{ path: 'company/detail/:id', component: CompanyDetailComponent },
+{ path: 'company/detail/:id/special', component: CompanySpecialStatusComponent },
 
 
 ];

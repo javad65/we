@@ -79,7 +79,6 @@ export abstract class BaseKendoGridComponent implements OnInit {
     }
 
     protected removeHandler( id ) {
-        debugger;
         this._service.remove( id );
     }
 

@@ -34,11 +34,15 @@ export class PersonSpecialStatusComponent extends BaseKendoGridComponent {
       that._service.readId = that.model.personId;
       that._service.readGrid();
       that._service._personService.find(that.model.personId)
-        .subscribe((r) => {
-          const m = <PersonModel>r;
-          that.model.personFirstName = m.firstName;
-          that.model.personLastName = m.lastName;
-          that.model.personAliasName = m.aliasName;
+        .subscribe(r => {
+
+          that._service._personService.operationHandling(r, (c) => {
+            const m = <PersonModel>c;
+            that.model.personFirstName = m.firstName;
+            that.model.personLastName = m.lastName;
+            that.model.personAliasName = m.aliasName;
+          });
+
         });
 
     });
