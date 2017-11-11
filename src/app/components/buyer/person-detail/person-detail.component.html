@@ -114,7 +114,26 @@
                   <span>تاریخ تولد
                       <span class="k-required">*</span>
                   </span>
-                  <kendo-datepicker [value]="birthDate" name="birthDate" [(ngModel)]="model.birthDate" style="width:100%;"></kendo-datepicker>
+
+                  <!-- <kendo-datepicker
+                   [value]="birthDate" 
+                   name="birthDate" 
+                   [(ngModel)]="model.birthDate" 
+                   style="width:100%;"></kendo-datepicker> -->
+
+                  <dp-date-picker 
+                  name="birthDate" 
+                  [(ngModel)]="birthDate "
+                  placeholder="تاریخ"
+                  theme="dp-material"
+                  class="k-textbox"
+                  style="width:100%;"
+                  [config]="datePickerConfig" 
+                  realonly
+                  >
+                </dp-date-picker>
+
+                
                 </label>
               </div>
             </div>

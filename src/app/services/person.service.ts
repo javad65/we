@@ -33,8 +33,7 @@ export class PersonKendoGridService extends BaseKendoGridService {
   _personService: PersonService;
 
   constructor(http: Http, service: PersonService) {
-    super(http, UrlHelper.PERSONSTATUS_API);
-    this._personService = service;
+    super(http, UrlHelper.PERSON_API);
   }
 
 

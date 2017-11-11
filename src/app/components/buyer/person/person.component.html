@@ -1,5 +1,42 @@
-<p>
-  person works!
-</p>
 
-<button class="k-button" type="button" (click)="addPerson()">افزودن</button>
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;"> 
+  <kendo-grid
+  [data]="gridDataResult | async"
+  [pageSize]="state.take"
+  [skip]="state.skip"
+  [sort]="state.sort"
+  [sortable]="true"
+  [pageable]="true"
+  [selectable]="true"
+  [scrollable]="'none'"
+  (remove)="removeHandler($event.dataItem.personId)"
+  
+  >
+  <ng-template kendoGridToolbarTemplate>
+    <button class="k-button" type="button" (click)="addPerson()">افزودن</button>
+  </ng-template>
+  <kendo-grid-column field="personId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+  <kendo-grid-column field="firstName" title="نام" width="200"></kendo-grid-column>
+  <kendo-grid-column field="lastName" title="نام خانوادگی" width="200"></kendo-grid-column>
+  <kendo-grid-column field="aliasName" title="نام مستعار" width="200"></kendo-grid-column>
+  <kendo-grid-column field="fatherName" title="نام پدر" width="200"></kendo-grid-column>
+   
+  
+  <kendo-grid-command-column title="" width="60">
+    <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
+        <button class="k-button" type="button" (click)="editPerson(dataItem.personId)" >ویرایش</button>
+        <button kendoGridRemoveCommand type="button">حذف</button>
+       </ng-template>
+  </kendo-grid-command-column>
+  
+  </kendo-grid>
+  
+  <hr>
+  <br> 
+  
+  
+  
+  </form> 
+  
+
+  

@@ -30,7 +30,7 @@ export class CompanyKendoGridService extends BaseKendoGridService {
   _companyService: CompanyService;
 
   constructor(http: Http, service: CompanyService) {
-    super(http, UrlHelper.COMPANYSTATUS_API);
+    super(http, UrlHelper.COMPANY_API);
     this._companyService = service;
   }
 

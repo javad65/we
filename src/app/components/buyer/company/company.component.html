@@ -1,5 +1,43 @@
-<p>
-  person works!
-</p>
 
-<button class="k-button" type="button" (click)="addPerson()">افزودن</button>
+<form novalidate #myForm="ngForm" style="margin-bottom: 100px;"> 
+  <kendo-grid
+  [data]="gridDataResult | async"
+  [pageSize]="state.take"
+  [skip]="state.skip"
+  [sort]="state.sort"
+  [sortable]="true"
+  [pageable]="true"
+  [selectable]="true"
+  [scrollable]="'none'"
+  (remove)="removeHandler($event.dataItem.companyId)"
+  
+  >
+  <ng-template kendoGridToolbarTemplate>
+    <button class="k-button" type="button" (click)="addItem()">افزودن</button>
+  </ng-template>
+  <kendo-grid-column field="companyId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+  <kendo-grid-column field="companyName" title="نام شرکت" width="200"></kendo-grid-column>
+  <kendo-grid-column field="companyAbbreviation" title="نام اختصاری" width="200"></kendo-grid-column>
+  <kendo-grid-column field="registrationNumber" title="شماره ثبت" width="100"></kendo-grid-column>
+  <kendo-grid-column field="nationalIdCode" title="شناسه ملی" width="100"></kendo-grid-column>
+  <kendo-grid-column field="economicCode" title="کد اقتصادی" width="100"></kendo-grid-column>
+   
+  
+  <kendo-grid-command-column title="" width="100">
+    <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
+        <button class="k-button" type="button" (click)="editItem(dataItem.companyId)" >ویرایش</button>
+        <button kendoGridRemoveCommand type="button">حذف</button>
+       </ng-template>
+  </kendo-grid-command-column>
+  
+  </kendo-grid>
+  
+  <hr>
+  <br> 
+  
+  
+  
+  </form> 
+  
+
+  
