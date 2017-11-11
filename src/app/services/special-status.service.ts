@@ -13,22 +13,25 @@ import { BaseKendoGridService } from './base-kendo-grid.service';
 import { UrlHelper } from '../infrastructure/url-helper';
 
 @Injectable()
-export class SpecialStatusService  extends BaseService {
+export class SpecialStatusService extends BaseService {
 
   constructor(http: Http) {
     super(http, UrlHelper.SpecialStatus_API);
-   }
+  }
 
 }
 
 
 
 @Injectable()
-export class SpecialStatusKendoGridService  extends BaseKendoGridService {
+export class SpecialStatusKendoGridService extends BaseKendoGridService {
+  statusService: SpecialStatusService;
 
-  constructor(http: Http) {
-    super(http,  UrlHelper.SpecialStatus_API);
-   }
+  constructor(http: Http, service: SpecialStatusService) {
+    super(http, UrlHelper.SpecialStatus_API);
+
+    this.statusService = service;
+  }
 
 
 }

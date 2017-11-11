@@ -78,8 +78,15 @@ export abstract class BaseKendoGridComponent implements OnInit {
         this.editedItem = undefined;
     }
 
-    protected removeHandler( id ) {
-        this._service.remove( id );
+    protected removeHandler(id) {
+        this._service.remove(id);
+    }
+
+
+    public dataStateChange(state: DataStateChangeEvent): void {
+        this.state = state;
+        this._service.state = state;
+        this._service.readGrid();
     }
 
 }

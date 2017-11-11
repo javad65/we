@@ -2,7 +2,7 @@
 export interface SpecialStatusModel {
     specialStatusId: number;
     name: string;
-    // نوع وضعیت خاص 
+    // نوع وضعیت خاص
     statusType?: boolean;
     // امکان انتخاب بیشتر
     canMoreSelect: boolean;

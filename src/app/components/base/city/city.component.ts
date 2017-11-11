@@ -52,11 +52,7 @@ export class CityComponent extends BaseKendoGridComponent {
   }
 
 
-  public dataStateChange(state: DataStateChangeEvent): void {
 
-    this._service.state = state;
-    this.refresh();
-  }
 
 
 }

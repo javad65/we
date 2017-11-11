@@ -7,36 +7,63 @@
       <form class="k-form k-rtl" #detailStatusForm="ngForm" (ngSubmit)="statusSubmit(detailStatusForm.form)" style="text-align:right;">
         <label class="k-form-field">
           <span>نام گروه</span>
-          <input class="k-textbox" name="statusName" placeholder="Your Name" required />
+          <input class="k-textbox"
+           name="name" 
+           [(ngModel)]="model.name" 
+           placeholder="نام گروه" required />
         </label>
         <!-- [(ngModel)]="model.name"  -->
 
-        <label class="k-form-field">
-          <input type="checkbox" id="auth-2fa" class="k-checkbox" checked="checked">
-          <label class="k-checkbox-label" for="auth-2fa">
-            Enable two-factor authentication</label>
-        </label>
-        <!-- [(ngModel)]="model.statusType"  -->
+        <div class="row ">
+          <div class="col-md-6">
+            <label class="k-form-field">
+              <span>نوع وضعیت خاص</span>
+              <kendo-dropdownlist [data]="statusTypeItems" name="statusTypeItem" [(ngModel)]="statusTypeItem" style="width:100%;">
+              </kendo-dropdownlist>
 
-        <label class="k-form-field">
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label class="k-form-field" style="margin-top:40px;">
+              <input type="checkbox" id="canMoreSelect" name="canMoreSelect" [(ngModel)]="model.canMoreSelect" class="k-checkbox" checked="checked">
+              <label class="k-checkbox-label" for="canMoreSelect">
+                امکان انتخاب بیشتر</label>
+            </label>
+          </div>
+        </div>
 
-          <input type="checkbox" id="auth-2fadd" class="k-checkbox" checked="checked">
-          <label class="k-checkbox-label" for="auth-2fadd">Enable two-factor authentication</label>
-        </label>
+        <div>
+          <button class="k-button k-primary" 
+          [disabled]="!(detailStatusForm.valid)" 
+          (click)="onSaveStatus(detailStatusForm.form)"
+           type="button">ذخیره</button>
 
-        <!-- [(ngModel)]="model.canMoreSelect"  -->
+          <button class="k-button k-default" 
+          (click)="newItem()"
+           type="button">جدید</button>
+
+           
+        </div>
 
 
       </form>
 
-
+      <br>
 
       <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
 
-        <kendo-grid [data]="gridDataResult | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="true"
-          [pageable]="true" [selectable]="true" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (selectionChange)="valueDetail.setStatusItem($event)"
-          (edit)="editHandler($event)" (cancel)="cancelHandler($event)" (save)="saveHandler($event)" (remove)="removeHandler($event)"
-          (add)="addHandler($event)">
+        <kendo-grid [data]="gridDataResult | async"
+         [pageSize]="state.take" 
+         [skip]="state.skip" 
+         [sort]="state.sort" 
+         [sortable]="true"
+          [pageable]="true" 
+          [selectable]="true" 
+          [scrollable]="'none'" 
+          (dataStateChange)="dataStateChange($event)" 
+          (selectionChange)="valueDetail.setStatusItem($event)"
+          (remove)="removeHandler($event.dataItem.specialStatusId)"
+         >
 
           <!--
               (selectionChange) ="onSelectionChange($event)"
@@ -56,7 +83,10 @@
               </ng-template>
           </kendo-grid-checkbox-column>
          -->
-          <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+          <kendo-grid-column field="specialStatusId" 
+          width="130" [hidden]="true"
+           [filterable]="false" 
+           [sortable]="false"></kendo-grid-column>
 
 
           <kendo-grid-column field="name" title="نام گروه" width="200" [filterable]="true">
@@ -100,11 +130,10 @@
           <kendo-grid-command-column title="" width="200">
             <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
 
-              <button kendoGridEditCommand1 type="button" class="k-button k-grid-edit-command">Edit</button>
-              <button kendoGridRemoveCommand type="button">Remove</button>
-              <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
-              <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
-            </ng-template>
+              <button  type="button" 
+              class="k-button k-grid-edit-command" (click)="editItem(dataItem)">ویرایش</button>
+              <button kendoGridRemoveCommand type="button">حذف</button>
+                 </ng-template>
           </kendo-grid-command-column>
 
         </kendo-grid>
