@@ -1,18 +1,28 @@
-import { OnInit } from '@angular/core';
+
+import {
+    Component, OnInit,
+    AfterViewInit,
+    ViewChild, ContentChild, ElementRef
+} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { process, State } from '@progress/kendo-data-query';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 
 import { NotifyManager } from '../../infrastructure/notify-manager';
-
+import { DeleteConfirmComponent } from '../shared/delete-confirm/delete-confirm.component';
 import { BaseKendoGridService } from '../../services/base-kendo-grid.service';
 
-export abstract class BaseKendoGridComponent implements OnInit {
+// @Component({
+// selector: 'app-base-kendo-grid',
+// template: `
+// <app-delete-confirm [openedConfirmDelete]="openedConfirmDelete"></app-delete-confirm>
+// `
+// })
+export abstract class BaseKendoGridComponent implements OnInit, AfterViewInit {
+
     protected notify: NotifyManager;
-
     protected gridDataResult: Observable<GridDataResult>;
-
     private buttonCount = 5;
     private info = true;
     private type: 'numeric' | 'input' = 'numeric';
@@ -26,15 +36,18 @@ export abstract class BaseKendoGridComponent implements OnInit {
             filters: []
         }
     };
+    public openedConfirmDelete = true;
     protected editedRowIndex: number;
     protected editedItem: any;
     protected _service: BaseKendoGridService;
+
+    @ContentChild('deleteConfirm') deleteConfirm: ElementRef;
+    @ViewChild(DeleteConfirmComponent) deleteConfirm2: DeleteConfirmComponent;
 
     constructor(service: BaseKendoGridService) {
         this._service = service;
         this.gridDataResult =
             this.gridDataResult = service;
-        // this.gridDataResult = process(s;
         this.notify = NotifyManager.createInstance();
 
 
@@ -43,6 +56,15 @@ export abstract class BaseKendoGridComponent implements OnInit {
     abstract ngOnInitHandler();
     ngOnInit() {
         this.ngOnInitHandler();
+
+        //  this.deleteConfirm.openedConfirmDelete = true;
+        // this.deleteConfirm.open();
+
+    }
+
+    ngAfterViewInit() {
+        // debugger;
+        // this.deleteConfirm.open();
     }
 
     protected addHandler({ sender }) {

@@ -74,6 +74,8 @@ import { CityComboSingleComponent } from './components/shared/city-combo-single/
 import { SpecialStatusComponent } from './components/buyer/special-status/special-status.component';
 import { SpecialStatusValueComponent } from './components/buyer/special-status-value/special-status-value.component';
 import { SpecialStatusValueUpsertComponent } from './components/buyer/special-status-value-upsert/special-status-value-upsert.component';
+import { SpecialStatusComboComponent } from './components/buyer/special-status/special-status-combo.component';
+import { SpecialStatusValueComboComponent } from './components/buyer/special-status-value/special-status-value-combo.component';
 import { SpecialStatusValueGridComponent } from './components/buyer/special-status-value-grid/special-status-value-grid.component';
 import { PersonComponent } from './components/buyer/person/person.component';
 import { PersonDetailComponent } from './components/buyer/person-detail/person-detail.component';
@@ -108,6 +110,8 @@ import { CompanySpecialStatusComponent } from './components/buyer/company-specia
     SpecialStatusValueComponent,
     SpecialStatusValueUpsertComponent,
     SpecialStatusValueGridComponent,
+    SpecialStatusComboComponent,
+    SpecialStatusValueComboComponent,
     PersonComponent,
     PersonDetailComponent,
     PersonSpecialStatusComponent,

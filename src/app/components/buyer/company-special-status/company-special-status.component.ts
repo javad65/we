@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit,
+  ViewChild
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { BaseComponent } from '../../shared/base.component';
 import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
+import { SpecialStatusValueComboComponent } from '../special-status-value/special-status-value-combo.component';
 import { CompanyModel, CompanyStatusModel } from '../../../model/company.model';
-import { CompanyService, CompanyKendoGridService } from '../../../services/company.service';
+import { CompanyService, CompanyStatusService, CompanyStatusKendoGridService } from '../../../services/company.service';
 
 @Component({
   selector: 'app-company-special-status',
@@ -12,33 +16,39 @@ import { CompanyService, CompanyKendoGridService } from '../../../services/compa
   styleUrls: ['./company-special-status.component.scss'],
   providers: [
     CompanyService,
-    CompanyKendoGridService
+    CompanyStatusService,
+    CompanyStatusKendoGridService
   ]
 })
 export class CompanySpecialStatusComponent extends BaseKendoGridComponent {
-  _service: CompanyKendoGridService;
+  _companyService: CompanyService;
+  _service: CompanyStatusKendoGridService;
   _activatedRoute: ActivatedRoute;
   _router: Router;
   model = <CompanyStatusModel>{};
-  constructor(activatedRoute: ActivatedRoute, service: CompanyKendoGridService) {
+  @ViewChild('statusValueCombo') statusValueCombo: SpecialStatusValueComboComponent;
+
+  constructor(activatedRoute: ActivatedRoute,
+    service: CompanyStatusKendoGridService,
+    companyService: CompanyService) {
     super(service);
     this._activatedRoute = activatedRoute;
     this._service = service;
+    this._companyService = companyService;
   }
 
   ngOnInitHandler() {
     const that = this;
     this._activatedRoute.params.subscribe(params => {
-      console.log(params);
       that.model.companyId = params['id'] as number;
       that._service.readId = that.model.companyId;
       that._service.readGrid();
-      that._service._companyService.find(that.model.companyId)
-        .subscribe(r => {
 
-          that._service._companyService.operationHandling(r, (c) => {
-            const m = <CompanyModel>c;
-            that.model.companyName = m.companyName;
+      that._companyService.find(that.model.companyId)
+        .subscribe(r => {
+          that._service._companyStatusService.operationHandling(r, (c) => {
+            const company = <CompanyModel>c;
+            that.model.companyName = company.companyName;
           });
 
         });
@@ -47,4 +57,33 @@ export class CompanySpecialStatusComponent extends BaseKendoGridComponent {
   }
 
 
+  public onStatusChange(item) {
+    this.statusValueCombo.statusId = item;
+    this.statusValueCombo.read();
+
+  }
+
+
+  public onSaveStatus(form) {
+    const that = this;
+    that._service.loading.show();
+
+    if (this.model.companyStatusId > 0) {
+      that._service._companyStatusService.edit(this.model)
+        .subscribe(res => {
+          that._service.notify.showSuccess();
+          that._service.readGrid();
+        });
+    } else {
+      this._service._companyStatusService.add(this.model)
+        .subscribe(res => {
+          that._service._companyStatusService.operationHandling(res, (c) => {
+            that._service.notify.showSuccess();
+            that.model.companyStatusId = c;
+            that._service.readGrid();
+          });
+        });
+
+    }
+  }
 }

@@ -9,6 +9,46 @@
 
 
 
+<form class="k-form k-rtl" #detailStatusForm="ngForm" (ngSubmit)="statusSubmit(detailStatusForm.form)" style="text-align:right;">
+  <label class="k-form-field">
+    <span> گروه وضعیت</span>
+   <app-special-status-combo  
+   #statusCombo
+   name="statusId"
+   (valueChanged)="onStatusChange($event)"
+    [(ngModel)]="model.statusId"
+    ngDefaultControl
+    style="width:100%;"
+    >
+
+   </app-special-status-combo>
+  </label>
+  <label class="k-form-field">
+    <span>نام وضعیت</span>
+   <app-special-status-value-combo  
+   #statusValueCombo
+   name="statusValueId"
+    [(ngModel)]="model.statusValueId"
+    ngDefaultControl
+    style="width:100%;"
+    >
+
+   </app-special-status-value-combo>
+  </label>
+  <!-- [(ngModel)]="model.name"  -->
+
+
+  <div>
+    <button class="k-button k-primary" 
+    [disabled]="!(detailStatusForm.valid)" 
+    (click)="onSaveStatus(detailStatusForm.form)"
+     type="button">ذخیره</button>
+
+ 
+     
+  </div>
+</form>
+<br>
 <form novalidate #myForm="ngForm" style="margin-bottom: 100px;">
 
   <kendo-grid 
@@ -20,10 +60,10 @@
     [pageable]="true" 
     [selectable]="true" 
     [scrollable]="'none'" 
-    (remove)="removeHandler($event.dataItem.personStatusId)"
+    (remove)="removeHandler($event.dataItem.companyStatusId)"
     >
 
-    <kendo-grid-column field="specialStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+    <kendo-grid-column field="companyStatusId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
 
     <kendo-grid-column field="statusName" title="گروه وضعیت خاص ">
     </kendo-grid-column>
@@ -32,7 +72,7 @@
     <kendo-grid-column field="moreStatusValue" title="سایر وضعیت خاص ">
     </kendo-grid-column>
 
-    <kendo-grid-command-column title="" width="200">
+    <kendo-grid-command-column title="" width="80">
       <ng-template kendoGridCellTemplate  let-dataItem="dataItem">
         <button kendoGridRemoveCommand type="button">حذف</button>
        </ng-template>

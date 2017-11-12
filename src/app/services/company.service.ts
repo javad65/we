@@ -38,3 +38,28 @@ export class CompanyKendoGridService extends BaseKendoGridService {
 
 }
 
+@Injectable()
+export class CompanyStatusService extends BaseService {
+
+  constructor(http: Http) {
+    super(http, UrlHelper.COMPANYSTATUS_API);
+  }
+
+
+
+}
+
+
+@Injectable()
+export class CompanyStatusKendoGridService extends BaseKendoGridService {
+  _companyStatusService: CompanyStatusService;
+
+  constructor(http: Http, service: CompanyStatusService) {
+    super(http, UrlHelper.COMPANYSTATUS_API);
+    this._companyStatusService = service;
+  }
+
+
+
+}
+
