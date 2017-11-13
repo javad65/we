@@ -38,5 +38,31 @@ export class PersonKendoGridService extends BaseKendoGridService {
 
 
 
+
 }
 
+
+@Injectable()
+export class PersonStatusService extends BaseService {
+
+  constructor(http: Http) {
+    super(http, UrlHelper.PERSONSTATUS_API);
+  }
+
+
+
+}
+
+
+@Injectable()
+export class PersonStatusKendoGridService extends BaseKendoGridService {
+  _personStatusService: PersonStatusService;
+
+  constructor(http: Http, service: PersonStatusService) {
+    super(http, UrlHelper.PERSONSTATUS_API);
+    this._personStatusService = service;
+  }
+
+
+
+}

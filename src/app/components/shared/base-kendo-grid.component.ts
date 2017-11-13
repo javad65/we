@@ -101,7 +101,10 @@ export abstract class BaseKendoGridComponent implements OnInit, AfterViewInit {
     }
 
     protected removeHandler(id) {
-        this._service.remove(id);
+        const that = this;
+        this._service.notify.showDeleteConfirm(() => {
+            that._service.remove(id);
+        });
     }
 
 

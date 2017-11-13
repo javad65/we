@@ -11,6 +11,12 @@ export class NotifyManager {
     private notifyConfig = {
         position: 'rightTop',
         timeout: 2000,
+        buttons: [],
+        showProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        backdrop: -1,
+        // icon: 'assets/custom-svg.svg'
     };
     constructor() {
         this.notifyService = AppModule.injector.get(SnotifyService);
@@ -26,30 +32,58 @@ export class NotifyManager {
 
 
     showSuccess(message?: string) {
+        this.notifyService.clear();
 
         this.notifyService.success(message || 'عملیات با موفقیت انجام گردید', '', this.notifyConfig);
-        //   this.notifyService.success('Example body content', 'Example Title');
-        //   this.notifyService.error('Example body content', {
-        //         timeout: 2000,
-        //         showProgressBar: false,
-        //         closeOnClick: false,
-        //         pauseOnHover: true,
-        //         position: 'rightTop'
-        //     });
-        //     this.notifyService.success('Example body content', 'Example title', {
-        //         timeout: 2000,
-        //         showProgressBar: false,
-        //         closeOnClick: false,
-        //         pauseOnHover: true,
-        //         backdrop: 1,
-        //         position: 'rightTop'
-        //     });
-
 
     }
 
     showError(message?: string) {
+        this.notifyService.clear();
+
         this.notifyService.error(message || 'خطایی در اجرای عملیات رخ داده', '', this.notifyConfig);
+
+    }
+
+    showDeleteConfirm(okAction: any, body?: string, title?: string) {
+        this.notifyService.clear();
+
+        const config = Object.assign({}, this.notifyConfig);
+        const that = this;
+        config.position = 'centerCenter';
+        config.closeOnClick = false;
+        config.showProgressBar = false;
+        config.backdrop = 1;
+        config.timeout = null;
+
+        config.buttons = [
+            {
+                text: 'تایید',
+                action: (toast) => {
+                    if (okAction) {
+                        setTimeout( () => {
+                            okAction();
+                            that.notifyService.clear();
+                        }, 500);
+                    }
+                    this.notifyService.remove(toast.id);
+
+                },
+                bold: true
+            },
+            {
+                text: 'انصراف',
+                action: (toast) => {
+                    this.notifyService.remove(toast.id);
+                },
+                bold: false
+            },
+        ];
+
+        this.notifyService.confirm(
+            body || 'آیا از حذف رکورد(ها) انتخابی اطمینان دارید؟',
+            title || 'حذف',
+            config);
 
     }
 

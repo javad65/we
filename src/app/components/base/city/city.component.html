@@ -14,7 +14,7 @@
   [scrollable]="'none'"
   (dataStateChange)="dataStateChange($event)"
   (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
-  (save)="saveHandler($event)" (remove)="removeHandler($event)"
+  (save)="saveHandler($event)" (remove)="removeHandler($event.dataItem.cityId)"
   (add)="addHandler($event)"
   
   >
@@ -22,11 +22,12 @@
     <button  
     class="k-button "
     (click)="detailDialog.openDialog()"
-    type="button">Add new</button>
+    type="button">افزودن</button>
   </ng-template>
-  <kendo-grid-column field="provinceId" width="130" [hidden]="true" [filterable]="false" [sortable]="false"></kendo-grid-column>
+  <kendo-grid-column field="provinceId" width="130" [hidden]="true"
+   [filterable]="false" [sortable]="false"></kendo-grid-column>
   
-  <kendo-grid-column field="countryName" width="200">
+  <kendo-grid-column field="countryName" title="کشور" width="200">
       <ng-template kendoGridEditTemplate let-dataItem="dataItem" >
          
         <!-- <app-country-combo
@@ -40,7 +41,7 @@
   </ng-template>
   </kendo-grid-column>
 
-  <kendo-grid-column field="provinceName" width="200">
+  <kendo-grid-column field="provinceName" title="استان" width="200">
   
   <ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
       <input [(ngModel)]="dataItem.provinceName" name="provinceName" class="k-textbox" required/>
@@ -48,24 +49,25 @@
   
   </kendo-grid-column>
 
-  <kendo-grid-column field="cityName" width="200">
+  <kendo-grid-column field="cityName" title="شهر" width="200">
   
   <ng-template kendoGridEditTemplate let-dataItem="dataItem"  >
-      <input [(ngModel)]="dataItem.cityName" name="cityName" class="k-textbox" required/>
+      <input [(ngModel)]="dataItem.cityName" name="cityName" 
+      class="k-textbox" required/>
   </ng-template>
   
   </kendo-grid-column>
   
   
-  <kendo-grid-command-column title="command" width="60">
+  <kendo-grid-command-column title="" width="60">
     <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem="dataItem">
   
         <button kendoGridEditCommand1 type="button"         
         class="k-button k-grid-edit-command"
-        (click)="detailDialog.openDialogById(dataItem.cityId)" >Edit</button>
-        <button kendoGridRemoveCommand type="button">Remove</button>
-        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
-        <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+        (click)="detailDialog.openDialogById(dataItem.cityId)" >ویرایش</button>
+        <button kendoGridRemoveCommand type="button">حذف</button>
+        <button kendoGridSaveCommand type="button" [disabled]="myForm.invalid">{{ isNew ? 'افزودن' : 'ویرایش' }}</button>
+        <button kendoGridCancelCommand type="button">{{ isNew ? 'عدم ذخیره' : 'انصراف' }}</button>
     </ng-template>
   </kendo-grid-command-column>
   

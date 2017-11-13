@@ -18,6 +18,9 @@ import { CountryModel } from '../../../model/country.model';
   selector: 'app-country',
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss'],
+  providers: [
+    CountryKendoGridService
+  ]
 
 })
 export class CountryComponent extends BaseKendoGridComponent {
@@ -54,68 +57,6 @@ export class CountryComponent extends BaseKendoGridComponent {
     // });
 
   }
-
-
-  public dataStateChange(state: DataStateChangeEvent): void {
-
-    this._service.state = state;
-    this.refresh();
-  }
-
-  //   protected pageChange(event: PageChangeEvent): void {
-
-  //     this.state.skip = event.skip;
-  //     this. refresh();
-  // }
-
-
-
-  // protected addHandler({sender}) {
-  //   this.closeEditor(sender);
-
-  //     sender.addRow(<CountryModel>{});
-  // }
-
-  // protected editHandler({sender, rowIndex, dataItem}) {
-  //   this.closeEditor(sender);
-
-  //   this.editedRowIndex = rowIndex;
-  //   this.editedItem = Object.assign({}, dataItem);
-  //   this._countryService.save(dataItem, false);
-
-  //   sender.editRow(rowIndex);
-  // }
-
-  // protected cancelHandler({sender, rowIndex}) {
-  //   this.closeEditor(sender, rowIndex);
-  // }
-
-  // private closeEditor(grid, rowIndex = this.editedRowIndex) {
-  //   grid.closeRow(rowIndex);
-  //   this._countryService.resetItem(this.editedItem);
-  //   this.editedRowIndex = undefined;
-  //   this.editedItem = undefined;
-  // }
-
-  // protected saveHandler({sender, rowIndex, dataItem, isNew}) {
-  //   this._countryService.save(dataItem, isNew);
-
-  //   sender.closeRow(rowIndex);
-
-  //   this.editedRowIndex = undefined;
-  //   this.editedItem = undefined;
-  // }
-
-  // protected removeHandler({dataItem}) {
-  //   this._countryService.remove(dataItem);
-  // }
-
-
-
-
-
-
-
 
 
 

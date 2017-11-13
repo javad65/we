@@ -62,11 +62,13 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
 
       this._baseService.add(data).subscribe(
         d => {
-          that.readGrid();
-          that.loading.hide();
+          that._baseService.operationHandling(d, (r) => {
+            that.notify.showSuccess();
+            that.readGrid();
+            that.loading.hide();
+          });
         },
         err => {
-
           that.notify.showError(err);
           console.log('error: ', err);
           that.loading.hide();
@@ -75,8 +77,11 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
     } else {
       this._baseService.edit(data).subscribe(
         d => {
-          that.readGrid();
-          that.loading.hide();
+          that._baseService.operationHandling(d, (r) => {
+            that.notify.showSuccess();
+            that.readGrid();
+            that.loading.hide();
+          });
         },
         err => {
           that.notify.showError(err);
@@ -92,16 +97,19 @@ export class BaseKendoGridService extends BehaviorSubject<GridDataResult> {
 
   public remove(id: number) {
     const that = this;
-    this.loading.show();
+    // this.loading.show();
     this._baseService.delete(id).subscribe(
       d => {
-        that.readGrid();
-        that.loading.hide();
+        that._baseService.operationHandling(d, (r) => {
+          that.notify.showSuccess();
+          that.readGrid();
+        });
+        // that.loading.hide();
       },
       err => {
         // console.log('error: ', err)
         that.notify.showError(err);
-        that.loading.hide();
+        // that.loading.hide();
       }
     );
   }
