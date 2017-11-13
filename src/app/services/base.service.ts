@@ -15,13 +15,15 @@ import { LoadingManager } from '../infrastructure/loading-manager';
 import { UrlHelper } from '../infrastructure/url-helper';
 import { OperationResultModel } from '../model/operation-result.model';
 
+import { AppModule } from '../app.module';
+import { AppConfigService } from '../core/services/app-config.service';
+
 
 @Injectable()
 export class BaseService {
+  configService: AppConfigService;
   loading: LoadingManager;
   notify: NotifyManager;
-  // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSONP_CALLBACK';
-  // private BASE_URL = 'http://localhost/Startup/api/country?callback=JSON_CALLBACK';
   private BASE_URL = UrlHelper.BASE_URL;
   public API_URL: string;
   protected _http: Http;
@@ -29,53 +31,17 @@ export class BaseService {
 
   constructor(http: Http, apiUrl: string) {
     this._http = http;
-    this.API_URL = this.BASE_URL + apiUrl;
 
+    if (!UrlHelper.BASE_URL) {
+      this.configService = AppModule.injector.get(AppConfigService);
+      this.BASE_URL = UrlHelper.BASE_URL = this.configService.config.apiHost;
+    }
+
+    this.API_URL = this.BASE_URL + apiUrl;
     this.notify = NotifyManager.createInstance();
     this.loading = LoadingManager.createInstance();
 
-    // const rr = ReflectiveInjector.resolveAndCreate([NotifierService]);
-    // const ch = rr.resolveAndCreateChild([NotifierService]);
-    // this.notifier = ch.get(NotifierService);
-
-
   }
-
-
-  // public fetchOData(state: any): Observable<GridDataResult> {
-  //   const queryStr = `${toODataString(state)}&$count=true`;
-
-  //   return this._http
-  //     .get(`${this.API_URL}?${queryStr}`)
-  //     .map(response => response.json())
-  //     .map(response => (<GridDataResult>{
-  //       data: response.value,
-  //       total: parseInt(response['@odata.count'], 10)
-  //     }));
-  // }
-
-  // public fetch(state: any): Observable<any[]> {
-  //   const queryStr = `${toDataSourceRequestString(state)}`;
-
-  //   return this._http
-  //     .get(`${this.API_URL}?${queryStr}`)
-  //     .map(response => response.json());
-
-  // }
-
-
-
-
-  // private fetch(action: string = "", data?: any): Observable<any[]>  {
-  //   return this.jsonp
-  //       .get(`https://demos.telerik.com/kendo-ui/service/Products/${action}?callback=JSONP_CALLBACK${this.serializeModels(data)}`)
-  //       .map(response => response.json());
-  // }
-
-  // private serializeModels(data?: any): string {
-  //  return data ? `&models=${JSON.stringify([data])}` : '';
-  // }
-
 
 
   public get(url?: string): Observable<any[]> {
@@ -245,7 +211,7 @@ export class BaseService {
         // that.operationHandling(b, (c) => {
         //   return c;
         // });
-         return b;
+        return b;
       });
 
 

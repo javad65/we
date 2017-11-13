@@ -13,6 +13,7 @@ import { BaseKendoGridService } from '../../../services/base-kendo-grid.service'
 import { CountryKendoGridService } from '../../../services/country.service';
 import { CountryModel } from '../../../model/country.model';
 
+import { TreeModel } from 'ng2-tree';
 
 @Component({
   selector: 'app-country',
@@ -25,14 +26,27 @@ import { CountryModel } from '../../../model/country.model';
 })
 export class CountryComponent extends BaseKendoGridComponent {
 
-  // public gridDataResult: Observable<GridDataResult>;
-  // public state: State = {
-  //   skip: 0,
-  //   take: 10,
-  // };
-  // private editedRowIndex: number;
-  // private editedItem: CountryModel;
-  // private _countryService: CountryService;
+  public tree: TreeModel = {
+    value: 'Programming languages by programming paradigm',
+    children: [
+      {
+        value: 'Object-oriented programming',
+        children: [
+          { value: 'Java' },
+          { value: 'C++' },
+          { value: 'C#' }
+        ]
+      },
+      {
+        value: 'Prototype-based programming',
+        children: [
+          { value: 'JavaScript' },
+          { value: 'CoffeeScript' },
+          { value: 'Lua' }
+        ]
+      }
+    ]
+  };
 
   constructor(service: CountryKendoGridService) {
     super(service);

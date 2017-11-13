@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 // import { HTTP_PROVIDERS } from '@angular/http';
 
 
-import {NgbDateStruct, NgbCalendar, NgbDatepickerI18n, NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar, NgbDatepickerI18n,
+   NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbCalendarPersian} from 'ng2-datepicker-jalali/persian/ngb-calendar-persian';
 import {NgbDatepickerI18nPersian} from 'ng2-datepicker-jalali/persian/ngb-datepicker-i18n-persian';
 
@@ -24,4 +25,5 @@ import {NgbDatepickerI18nPersian} from 'ng2-datepicker-jalali/persian/ngb-datepi
 export class AppComponent {
   title = 'app';
   template = `<img src="assets/img/loading.gif" />`;
+
 }

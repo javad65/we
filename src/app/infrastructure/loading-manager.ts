@@ -7,7 +7,7 @@ import { AppModule } from '../app.module';
 @Injectable()
 export class LoadingManager {
     static _loadingManager: LoadingManager;
-    loading: Ng4LoadingSpinnerService;
+   // loading: Ng4LoadingSpinnerService;
     busyConfig = {
         busy: null,
         message: 'My message',
@@ -15,7 +15,7 @@ export class LoadingManager {
     };
 
     constructor() {
-        this.loading = AppModule.injector.get(Ng4LoadingSpinnerService);
+       // this.loading = AppModule.injector.get(Ng4LoadingSpinnerService);
     }
 
     static createInstance(): LoadingManager {
@@ -28,11 +28,18 @@ export class LoadingManager {
 
 
     show() {
-        this.loading.show();
+       // this.loading.show();
     }
 
     hide() {
-        this.loading.hide();
+      //  this.loading.hide();
+    }
+
+    startLoadingSpinner() {
+      //  this.loading.show();
+        setTimeout(function () {
+            this.ng4LoadingSpinnerService.hide();
+        }.bind(this), 4000);
     }
 
 }

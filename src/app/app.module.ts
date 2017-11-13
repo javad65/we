@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA, Injector } from '@angular/core';
+import {
+  LOCALE_ID, NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Injector, APP_INITIALIZER
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,8 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // third party
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DpDatePickerModule} from 'ng2-jalali-date-picker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { TreeModule } from 'ng2-tree';
+
 
 // Kendo
 import { RTL } from '@progress/kendo-angular-l10n';
@@ -35,6 +41,9 @@ import { load } from '@progress/kendo-angular-intl';
 //     require('cldr-data/main/es/timeZoneNames.json')
 // );
 
+
+import { AryaNetCoreModule } from './core/core.module';
+import { AppConfigService } from './core/services/app-config.service';
 
 import { AppRoutingModule } from './app-routing.module';
 // // modules
@@ -121,15 +130,18 @@ import { CompanySpecialStatusComponent } from './components/buyer/company-specia
     CompanySpecialStatusComponent,
   ],
   imports: [
+    AryaNetCoreModule,
+
     BrowserModule,
     FormsModule,
     HttpModule,
 
     NgbModule.forRoot(),
     SnotifyModule,
-    Ng4LoadingSpinnerModule,
+    // Ng4LoadingSpinnerModule,
     DpDatePickerModule,
-    
+    TreeModule,
+
     // Register the kendo modules
     BrowserAnimationsModule,
     ButtonsModule,
@@ -158,7 +170,15 @@ import { CompanySpecialStatusComponent } from './components/buyer/company-specia
     CountryService,
     ProvinceService,
 
-    { provide: RTL, useValue: true }
+    { provide: RTL, useValue: true },
+
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init,
+      multi: true,
+      deps: [AppConfigService]
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -179,3 +199,8 @@ export class AppModule {
 
 
 
+export function init(config: AppConfigService) {
+  return () => {
+    return config.load();
+  };
+}
