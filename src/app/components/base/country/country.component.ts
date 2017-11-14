@@ -2,18 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-// kendo
-import { State } from '@progress/kendo-data-query';
-import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
-
-
 import { BaseKendoGridComponent } from '../../shared/base-kendo-grid.component';
-
 import { BaseKendoGridService } from '../../../services/base-kendo-grid.service';
 import { CountryKendoGridService } from '../../../services/country.service';
 import { CountryModel } from '../../../model/country.model';
 
-import { TreeModel } from 'ng2-tree';
 
 @Component({
   selector: 'app-country',
@@ -25,28 +18,6 @@ import { TreeModel } from 'ng2-tree';
 
 })
 export class CountryComponent extends BaseKendoGridComponent {
-
-  public tree: TreeModel = {
-    value: 'Programming languages by programming paradigm',
-    children: [
-      {
-        value: 'Object-oriented programming',
-        children: [
-          { value: 'Java' },
-          { value: 'C++' },
-          { value: 'C#' }
-        ]
-      },
-      {
-        value: 'Prototype-based programming',
-        children: [
-          { value: 'JavaScript' },
-          { value: 'CoffeeScript' },
-          { value: 'Lua' }
-        ]
-      }
-    ]
-  };
 
   constructor(service: CountryKendoGridService) {
     super(service);

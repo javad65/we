@@ -15,7 +15,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
-import { TreeModule } from 'ng2-tree';
+import { TreeModule } from './ng2-tree/src/tree.module';
 
 
 // Kendo
@@ -94,6 +94,14 @@ import { CompanyComponent } from './components/buyer/company/company.component';
 import { CompanyDetailComponent } from './components/buyer/company-detail/company-detail.component';
 import { CompanySpecialStatusComponent } from './components/buyer/company-special-status/company-special-status.component';
 
+
+import { UnitComponent } from './components/unit/unit/unit.component';
+import { FeatureComponent } from './components/unit/feature/feature.component';
+import { MeasuringUnitComponent } from './components/unit/measuring-unit/measuring-unit.component';
+import { UsageComponent } from './components/unit/usage/usage.component';
+
+
+
 @NgModule({
   declarations: [
     JalaliPipe,
@@ -128,6 +136,11 @@ import { CompanySpecialStatusComponent } from './components/buyer/company-specia
     CompanyComponent,
     CompanyDetailComponent,
     CompanySpecialStatusComponent,
+
+    UnitComponent,
+    FeatureComponent,
+    UsageComponent,
+    MeasuringUnitComponent
   ],
   imports: [
     AryaNetCoreModule,

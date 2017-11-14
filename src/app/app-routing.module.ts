@@ -20,6 +20,12 @@ import { CompanyComponent } from './components/buyer/company/company.component';
 import { CompanyDetailComponent } from './components/buyer/company-detail/company-detail.component';
 import { CompanySpecialStatusComponent } from './components/buyer/company-special-status/company-special-status.component';
 
+import { UnitComponent } from './components/unit/unit/unit.component';
+import { FeatureComponent } from './components/unit/feature/feature.component';
+import { MeasuringUnitComponent } from './components/unit/measuring-unit/measuring-unit.component';
+import { UsageComponent } from './components/unit/usage/usage.component';
+
+
 const routes: Routes = [
 //   { path: 'home', component: WelcomeComponent },
 //   { path: 'welcome', redirectTo: 'home', pathMatch: 'full' },
@@ -41,6 +47,13 @@ const routes: Routes = [
 { path: 'company/detail', component: CompanyDetailComponent },
 { path: 'company/detail/:id', component: CompanyDetailComponent },
 { path: 'company/detail/:id/special', component: CompanySpecialStatusComponent },
+
+
+{ path: 'unit', component: UnitComponent },
+{ path: 'unitfeature', component: FeatureComponent },
+{ path: 'measuringunit', component: MeasuringUnitComponent },
+{ path: 'unitusage', component: UsageComponent },
+
 
 
 ];
